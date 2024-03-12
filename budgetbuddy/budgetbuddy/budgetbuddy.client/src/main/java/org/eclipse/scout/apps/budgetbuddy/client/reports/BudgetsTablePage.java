@@ -31,6 +31,8 @@ public class BudgetsTablePage extends AbstractPageWithTable<Table> {
         importPageData(BEANS.get(IBudgetsService.class).getBudgetsTableData(filter));
     }
 
+
+
     @Override
     protected String getConfiguredTitle() {
         return TEXTS.get("Budgets");

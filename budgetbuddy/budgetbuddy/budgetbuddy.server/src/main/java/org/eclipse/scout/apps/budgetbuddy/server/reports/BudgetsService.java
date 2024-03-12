@@ -6,6 +6,8 @@ import org.eclipse.scout.rt.platform.holders.NVPair;
 import org.eclipse.scout.rt.server.jdbc.SQL;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 
+import java.math.BigDecimal;
+
 public class BudgetsService implements IBudgetsService {
     @Override
     public BudgetsTablePageData getBudgetsTableData(SearchFilter filter) {
@@ -27,5 +29,17 @@ public class BudgetsService implements IBudgetsService {
   public void deleteBill(Integer selectedValue) {
     String stmt = "UPDATE budgets SET is_deleted = true, deleted_at = now() WHERE id = :budgetId";
     SQL.update(stmt, new NVPair("budgetId", selectedValue));
+  }
+
+  @Override
+  public void substractBudgetAmount(BigDecimal amount, Long budgetId) {
+      String stmt = "UPDATE budgets SET expenses = expenses + :amount, current_balance = current_balance - :amount WHERE id = :budgetId";
+    SQL.update(stmt, new NVPair("budgetId", budgetId), new NVPair("amount", amount));
+  }
+
+  @Override
+  public void updateBudgetAmount(BigDecimal billAmount, Long budgetId) {
+    String stmt = "UPDATE budgets SET current_balance = current_balance + :billAmount, expenses = expenses - :billAmount WHERE id = :budgetId";
+    SQL.update(stmt, new NVPair("billAmount", billAmount), new NVPair("budgetId", budgetId));
   }
 }

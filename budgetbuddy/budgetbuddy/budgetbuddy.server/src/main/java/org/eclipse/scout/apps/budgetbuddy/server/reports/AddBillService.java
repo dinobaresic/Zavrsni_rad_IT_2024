@@ -15,7 +15,7 @@ public class AddBillService implements IAddBillService {
 
     @Override
     public AddBillFormData create(AddBillFormData formData) {
-      String stmt = "INSERT INTO bills (name, address, taxamount, price, date) VALUES (:Name, :Address, :TaxAmount, :Amount, :Date)";
+      String stmt = "INSERT INTO bills (name, address, taxamount, price, date, budget_id) VALUES (:Name, :Address, :TaxAmount, :Amount, :Date, :Budget)";
       SQL.insert(stmt, formData);
         return formData;
     }

@@ -1,12 +1,11 @@
 package org.eclipse.scout.apps.budgetbuddy.client.reports;
 
+import org.eclipse.scout.apps.budgetbuddy.client.informations.MessageBoxHelper;
 import org.eclipse.scout.apps.budgetbuddy.client.reports.AddBillForm.MainBox.CancelButton;
 import org.eclipse.scout.apps.budgetbuddy.client.reports.AddBillForm.MainBox.GroupBox;
 import org.eclipse.scout.apps.budgetbuddy.client.reports.AddBillForm.MainBox.OkButton;
-import org.eclipse.scout.apps.budgetbuddy.shared.reports.AddBillFormData;
-import org.eclipse.scout.apps.budgetbuddy.shared.reports.CreateAddBillPermission;
-import org.eclipse.scout.apps.budgetbuddy.shared.reports.IAddBillService;
-import org.eclipse.scout.apps.budgetbuddy.shared.reports.UpdateAddBillPermission;
+import org.eclipse.scout.apps.budgetbuddy.shared.lookups.BudgetLookupCall;
+import org.eclipse.scout.apps.budgetbuddy.shared.reports.*;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
@@ -15,16 +14,21 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
-import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @FormData(value = AddBillFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
 public class AddBillForm extends AbstractForm {
+
+
     @Override
     protected String getConfiguredTitle() {
         return TEXTS.get("AddBill");
@@ -36,6 +40,10 @@ public class AddBillForm extends AbstractForm {
 
   public GroupBox.DataFieldsBox.AmountField getAmountField() {
     return getFieldByClass(GroupBox.DataFieldsBox.AmountField.class);
+  }
+
+  public GroupBox.DataFieldsBox.BudgetField getBudgetField() {
+    return getFieldByClass(GroupBox.DataFieldsBox.BudgetField.class);
   }
 
   public MainBox getMainBox() {
@@ -69,6 +77,7 @@ public class AddBillForm extends AbstractForm {
   public GroupBox.DataFieldsBox.TaxAmountField getTaxAmountField() {
     return getFieldByClass(GroupBox.DataFieldsBox.TaxAmountField.class);
   }
+  
 
   @Order(1000)
     public class MainBox extends AbstractGroupBox {
@@ -158,6 +167,33 @@ public class AddBillForm extends AbstractForm {
               }
 
             }
+
+            @Order(6000)
+            public class BudgetField extends AbstractSmartField<Long> {
+              @Override
+              protected String getConfiguredLabel() {
+                return TEXTS.get("BudgetName");
+              }
+
+              @Override
+              protected Long execValidateValue(Long rawValue) {
+                if(rawValue == null) {
+                  return null;
+                }
+                BigDecimal amount = getAmountField().getValue();
+                boolean flag = BEANS.get(IBillsService.class).checkBudget(rawValue, amount);
+                if(!flag) {
+                  MessageBoxHelper.showWarningMessage("Budget is not enough, please select another budget or add more money to the current one...");
+                }
+                return super.execValidateValue(rawValue);
+              }
+
+              @Override
+              protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+                return BudgetLookupCall.class;
+              }
+            }
+
           }
 
         }

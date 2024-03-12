@@ -25,7 +25,6 @@ public class AddBudgetService implements IAddBudgetService {
     @Override
     public AddBudgetFormData load(AddBudgetFormData formData) {
 
-
         return formData;
     }
 
