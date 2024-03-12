@@ -7,4 +7,5 @@ import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 @TunnelToServer
 public interface IBillsService extends IService {
     BillsTablePageData getBillsTableData(SearchFilter filter);
+    void deleteBill(Integer selectedValue);
 }
