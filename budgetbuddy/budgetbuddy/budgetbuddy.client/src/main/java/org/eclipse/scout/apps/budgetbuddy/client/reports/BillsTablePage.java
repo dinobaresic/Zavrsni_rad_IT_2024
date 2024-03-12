@@ -1,5 +1,6 @@
 package org.eclipse.scout.apps.budgetbuddy.client.reports;
 
+import org.eclipse.scout.apps.budgetbuddy.client.common.AbstractAddMenu;
 import org.eclipse.scout.apps.budgetbuddy.client.common.AbstractDeleteMenu;
 import org.eclipse.scout.apps.budgetbuddy.client.informations.MessageBoxHelper;
 import org.eclipse.scout.apps.budgetbuddy.client.informations.NotificationHelper;
@@ -57,6 +58,21 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
             reloadPage();
           }
 
+        }
+      }
+
+      @Order(2000)
+      public class AddMenu extends AbstractAddMenu {
+
+        @Override
+        protected void execAction() {
+          AddBillForm form = new AddBillForm();
+          form.startNew();
+          form.waitFor();
+          if(form.isFormStored()) {
+            NotificationHelper.showSaveSuccessNotification();
+            reloadPage();
+          }
         }
       }
 
