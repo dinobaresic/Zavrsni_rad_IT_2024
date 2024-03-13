@@ -55,16 +55,16 @@ public class BillsTablePageData extends AbstractTablePageData {
         public static final String name = "name";
         public static final String address = "address";
         public static final String date = "date";
+        public static final String budget = "budget";
         public static final String taxAmount = "taxAmount";
         public static final String price = "price";
-        public static final String budget = "budget";
         private Integer m_id;
         private String m_name;
         private String m_address;
         private Date m_date;
+        private Long m_budget;
         private BigDecimal m_taxAmount;
         private BigDecimal m_price;
-        private Long m_budget;
 
         public Integer getId() {
             return m_id;
@@ -98,6 +98,14 @@ public class BillsTablePageData extends AbstractTablePageData {
             m_date = newDate;
         }
 
+        public Long getBudget() {
+            return m_budget;
+        }
+
+        public void setBudget(Long newBudget) {
+            m_budget = newBudget;
+        }
+
         public BigDecimal getTaxAmount() {
             return m_taxAmount;
         }
@@ -112,14 +120,6 @@ public class BillsTablePageData extends AbstractTablePageData {
 
         public void setPrice(BigDecimal newPrice) {
             m_price = newPrice;
-        }
-
-        public Long getBudget() {
-            return m_budget;
-        }
-
-        public void setBudget(Long newBudget) {
-            m_budget = newBudget;
         }
     }
 }

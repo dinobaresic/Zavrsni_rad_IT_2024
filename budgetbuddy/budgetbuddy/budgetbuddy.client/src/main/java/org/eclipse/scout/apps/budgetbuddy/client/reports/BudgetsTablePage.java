@@ -63,7 +63,7 @@ public class BudgetsTablePage extends AbstractPageWithTable<Table> {
         protected void execAction() {
           if (MessageBoxHelper.showDeleteConfirmationMessage() == IMessageBox.YES_OPTION) {
             NotificationHelper.showDeleteSuccessNotification();
-            BEANS.get(IBudgetsService.class).deleteBill(getIdColumn().getSelectedValue());
+            BEANS.get(IBudgetsService.class).deleteBudget(getIdColumn().getSelectedValue());
             reloadPage();
           }
 

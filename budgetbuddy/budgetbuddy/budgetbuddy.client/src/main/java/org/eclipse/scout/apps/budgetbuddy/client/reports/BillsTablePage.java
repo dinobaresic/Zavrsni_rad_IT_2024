@@ -5,11 +5,15 @@ import org.eclipse.scout.apps.budgetbuddy.client.common.AbstractDeleteMenu;
 import org.eclipse.scout.apps.budgetbuddy.client.informations.MessageBoxHelper;
 import org.eclipse.scout.apps.budgetbuddy.client.informations.NotificationHelper;
 import org.eclipse.scout.apps.budgetbuddy.client.reports.BillsTablePage.Table;
+import org.eclipse.scout.apps.budgetbuddy.shared.Icons;
 import org.eclipse.scout.apps.budgetbuddy.shared.lookups.BudgetLookupCall;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.BillsTablePageData;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.IBillsService;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.IBudgetsService;
 import org.eclipse.scout.rt.client.dto.Data;
+import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
+import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.*;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
@@ -17,10 +21,12 @@ import org.eclipse.scout.rt.client.ui.messagebox.IMessageBox;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
+import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Data(BillsTablePageData.class)
 public class BillsTablePage extends AbstractPageWithTable<Table> {
@@ -37,7 +43,7 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
     @Override
     protected String getConfiguredTitle() {
 // TODO [Dino] verify translation
-        return TEXTS.get("BillsTablePage");
+        return TEXTS.get("BillsTablePage0");
     }
 
     public class Table extends AbstractTable {
@@ -66,7 +72,6 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
           form.startNew();
           form.waitFor();
           if(form.isFormStored()) {
-            //TODO [Dino] Popraviti logiku oddavanja računa na osnovu budžeta
             BigDecimal amount = form.getAmountField().getValue();
             Long budgetId = form.getBudgetField().getValue();
             BEANS.get(IBudgetsService.class).substractBudgetAmount(amount, budgetId);
@@ -75,6 +80,40 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
           }
         }
       }
+
+      @Order(3000)
+      public class AddBillAIMenu extends AbstractMenu {
+        @Override
+        protected String getConfiguredText() {
+          return TEXTS.get("AddBillAiOcr");
+        }
+
+        @Override
+        protected String getConfiguredIconId() {
+          return Icons.Star;
+        }
+
+        @Override
+        protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+          return CollectionUtility.hashSet(TableMenuType.EmptySpace);
+        }
+
+        @Override
+        protected void execAction() {
+            AddBillAiOcrForm form = new AddBillAiOcrForm();
+            form.startNew();
+            form.waitFor();
+            if(form.isFormStored()) {
+              BigDecimal amount = form.getAmountField().getValue();
+              Long budgetId = form.getBudgetField().getValue();
+              BEANS.get(IBudgetsService.class).substractBudgetAmount(amount, budgetId);
+                NotificationHelper.showSaveSuccessNotification();
+                reloadPage();
+            }
+        }
+      }
+
+
 
 
       protected boolean getConfiguredAutoResizeColumns() {
@@ -174,37 +213,7 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
         }
 
       }
-
       @Order(5000)
-      public class TaxAmountColumn extends AbstractBigDecimalColumn {
-        @Override
-        protected String getConfiguredHeaderText() {
-          return TEXTS.get("TaxAmount");
-        }
-
-        @Override
-        protected int getConfiguredWidth() {
-          return 100;
-        }
-      }
-
-
-
-      @Order(6000)
-      public class PriceColumn extends AbstractBigDecimalColumn {
-        @Override
-        protected String getConfiguredHeaderText() {
-          return TEXTS.get("Price");
-        }
-
-
-        @Override
-        protected int getConfiguredWidth() {
-          return 100;
-        }
-      }
-
-      @Order(7000)
       public class BudgetColumn extends AbstractSmartColumn<Long> {
         @Override
         protected String getConfiguredHeaderText() {
@@ -215,6 +224,33 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
         protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
           return BudgetLookupCall.class;
         }
+
+        @Override
+        protected int getConfiguredWidth() {
+          return 100;
+        }
+      }
+
+      @Order(6000)
+      public class TaxAmountColumn extends AbstractBigDecimalColumn {
+        @Override
+        protected String getConfiguredHeaderText() {
+          return TEXTS.get("TaxAmount");
+        }
+        @Override
+        protected int getConfiguredWidth() {
+          return 100;
+        }
+      }
+
+
+      @Order(7000)
+      public class PriceColumn extends AbstractBigDecimalColumn {
+        @Override
+        protected String getConfiguredHeaderText() {
+          return TEXTS.get("Price");
+        }
+
 
         @Override
         protected int getConfiguredWidth() {

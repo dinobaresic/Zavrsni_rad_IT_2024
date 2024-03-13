@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @TunnelToServer
 public interface IBudgetsService extends IService {
     BudgetsTablePageData getBudgetsTableData(SearchFilter filter);
-  void deleteBill(Integer selectedValue);
+  void deleteBudget(Integer selectedValue);
   void substractBudgetAmount(BigDecimal amount, Long budgetId);
 
   void updateBudgetAmount(BigDecimal billAmount, Long budgetId);

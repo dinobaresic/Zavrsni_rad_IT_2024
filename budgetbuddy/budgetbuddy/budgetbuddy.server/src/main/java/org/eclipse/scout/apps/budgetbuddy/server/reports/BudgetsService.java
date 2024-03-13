@@ -26,9 +26,14 @@ public class BudgetsService implements IBudgetsService {
     }
 
   @Override
-  public void deleteBill(Integer selectedValue) {
+  public void deleteBudget(Integer selectedValue) {
+
     String stmt = "UPDATE budgets SET is_deleted = true, deleted_at = now() WHERE id = :budgetId";
     SQL.update(stmt, new NVPair("budgetId", selectedValue));
+    /*
+    String stmt = "DELETE FROM budgets WHERE id = :budgetId";
+    SQL.delete(stmt, new NVPair("budgetId", selectedValue));7
+     */
   }
 
   @Override

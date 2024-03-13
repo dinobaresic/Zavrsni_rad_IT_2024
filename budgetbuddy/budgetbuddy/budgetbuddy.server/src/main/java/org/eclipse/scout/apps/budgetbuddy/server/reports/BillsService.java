@@ -15,6 +15,8 @@ import java.math.BigDecimal;
 public class BillsService implements IBillsService {
     @Override
     public BillsTablePageData getBillsTableData(SearchFilter filter) {
+
+      setBillIsDeletedIfBudgetIsDeleted();
         BillsTablePageData pageData = new BillsTablePageData();
       StringBuffer  varname1 = new StringBuffer();
       varname1.append("SELECT id, ");
@@ -30,6 +32,17 @@ public class BillsService implements IBillsService {
       SQL.selectInto(varname1.toString(), pageData);
         return pageData;
     }
+
+  private void setBillIsDeletedIfBudgetIsDeleted() {
+    StringBuffer  varname1 = new StringBuffer();
+    varname1.append("UPDATE bills ");
+    varname1.append("SET    is_deleted = true, ");
+    varname1.append("       deleted_at = now() ");
+    varname1.append("WHERE  budget_id IN (SELECT id ");
+    varname1.append("                    FROM   budgets ");
+    varname1.append("                    WHERE  is_deleted = true) ");
+    SQL.update(varname1.toString());
+  }
 
   @Override
   public void deleteBill(Integer selectedValue) {
