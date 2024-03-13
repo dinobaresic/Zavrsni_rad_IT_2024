@@ -9,6 +9,7 @@ import org.eclipse.scout.apps.budgetbuddy.shared.reports.*;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.bigdecimalfield.AbstractBigDecimalField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
@@ -77,7 +78,7 @@ public class AddBillForm extends AbstractForm {
   public GroupBox.DataFieldsBox.TaxAmountField getTaxAmountField() {
     return getFieldByClass(GroupBox.DataFieldsBox.TaxAmountField.class);
   }
-  
+
 
   @Order(1000)
     public class MainBox extends AbstractGroupBox {
@@ -143,7 +144,12 @@ public class AddBillForm extends AbstractForm {
                 return TEXTS.get("TotalPrice");
               }
 
-              @Override
+                @Override
+                protected boolean getConfiguredMandatory() {
+                    return true;
+                }
+
+                @Override
               protected BigDecimal getConfiguredMinValue() {
                 return new BigDecimal("-999999999999999999");
               }
@@ -175,7 +181,22 @@ public class AddBillForm extends AbstractForm {
                 return TEXTS.get("BudgetName");
               }
 
-              @Override
+                @Override
+                protected Class<? extends IValueField> getConfiguredMasterField() {
+                    return AmountField.class;
+                }
+
+                @Override
+                protected boolean getConfiguredMasterRequired() {
+                    return true;
+                }
+
+                @Override
+                protected boolean getConfiguredMandatory() {
+                    return true;
+                }
+
+                @Override
               protected Long execValidateValue(Long rawValue) {
                 if(rawValue == null) {
                   return null;

@@ -31,14 +31,19 @@ public class BudgetsTablePage extends AbstractPageWithTable<Table> {
         importPageData(BEANS.get(IBudgetsService.class).getBudgetsTableData(filter));
     }
 
+  @Override
+  protected void execPageActivated() {
+    execLoadData(new SearchFilter());
+  }
 
 
-    @Override
+  @Override
     protected String getConfiguredTitle() {
         return TEXTS.get("Budgets");
     }
 
     public class Table extends AbstractTable {
+
 
       @Order(1000)
       public class AddMenu extends AbstractAddMenu {

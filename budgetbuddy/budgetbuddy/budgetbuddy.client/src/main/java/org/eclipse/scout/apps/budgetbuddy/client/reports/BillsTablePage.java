@@ -40,7 +40,12 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
         importPageData(BEANS.get(IBillsService.class).getBillsTableData(filter));
     }
 
-    @Override
+  @Override
+  protected void execPageActivated() {
+    execLoadData(new SearchFilter());
+  }
+
+  @Override
     protected String getConfiguredTitle() {
 // TODO [Dino] verify translation
         return TEXTS.get("BillsTablePage0");

@@ -9,6 +9,7 @@ import org.eclipse.scout.apps.budgetbuddy.shared.reports.*;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.bigdecimalfield.AbstractBigDecimalField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
@@ -313,6 +314,10 @@ public class AddBillAiOcrForm extends AbstractForm {
                     return false;
                 }
 
+                @Override
+                protected boolean getConfiguredMandatory() {
+                    return true;
+                }
 
                 @Override
                 protected BigDecimal getConfiguredMaxValue() {
@@ -342,6 +347,16 @@ public class AddBillAiOcrForm extends AbstractForm {
 
                 @Override
                 protected boolean getConfiguredMandatory() {
+                    return true;
+                }
+
+                @Override
+                protected Class<? extends IValueField> getConfiguredMasterField() {
+                    return AmountField.class;
+                }
+
+                @Override
+                protected boolean getConfiguredMasterRequired() {
                     return true;
                 }
 
