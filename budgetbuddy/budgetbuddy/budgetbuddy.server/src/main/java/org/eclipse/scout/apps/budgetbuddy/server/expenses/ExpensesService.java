@@ -47,6 +47,12 @@ public class ExpensesService implements IExpensesService {
         String stmt = "UPDATE expenses SET is_deleted = true, deleted_at = now() WHERE id = :expenseId";
         SQL.update(stmt, new NVPair("expenseId", selectedValue));
         BEANS.get(IBudgetsService.class).updateBudgetAmount(getExpenseAmount(selectedValue), getBudgetId(selectedValue));
+        deleteExpenseFromAllExpenses(selectedValue);
+    }
+
+    private void deleteExpenseFromAllExpenses(Integer selectedValue) {
+        String stmt = "DELETE FROM all_expenses WHERE expense_id = :expenseId";
+        SQL.delete(stmt, new NVPair("expenseId", selectedValue));
     }
 
     private Long getBudgetId(Integer selectedValue) {

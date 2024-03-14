@@ -41,7 +41,7 @@ public class ExpensesTablePage extends AbstractPageWithTable<Table> {
 
     @Override
     protected String getConfiguredTitle() {
-        return TEXTS.get("ExpensesTablePage");
+        return TEXTS.get("ParticularExpenses");
     }
 
     public class Table extends AbstractTable {

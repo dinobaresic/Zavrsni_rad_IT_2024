@@ -1,7 +1,6 @@
 package org.eclipse.scout.apps.budgetbuddy.client.search;
 
-import org.eclipse.scout.apps.budgetbuddy.client.reports.BillsTablePage;
-import org.eclipse.scout.apps.budgetbuddy.client.reports.BudgetsTablePage;
+import org.eclipse.scout.apps.budgetbuddy.client.report.BudgetsHistoryTablePage;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.client.ui.desktop.outline.AbstractSearchOutline;
@@ -29,6 +28,7 @@ public class SearchOutline extends AbstractSearchOutline {
   @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) {
     super.execCreateChildPages(pageList);
+    pageList.add(new BudgetsHistoryTablePage());
   }
 
   @Override
