@@ -2,6 +2,7 @@ package org.eclipse.scout.apps.budgetbuddy.client.work;
 
 import java.util.List;
 
+import org.eclipse.scout.apps.budgetbuddy.client.expenses.ExpensesTablePage;
 import org.eclipse.scout.apps.budgetbuddy.client.reports.BillsTablePage;
 import org.eclipse.scout.apps.budgetbuddy.client.reports.BudgetsTablePage;
 import org.eclipse.scout.rt.platform.Order;
@@ -23,6 +24,7 @@ public class WorkOutline extends AbstractOutline {
     super.execCreateChildPages(pageList);
     pageList.add(new BillsTablePage());
     pageList.add(new BudgetsTablePage());
+    pageList.add(new ExpensesTablePage());
   }
 
   @Override
