@@ -8,8 +8,11 @@ import org.eclipse.scout.apps.budgetbuddy.client.reports.BudgetsTablePage.Table;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.BudgetsTablePageData;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.IBudgetsService;
 import org.eclipse.scout.rt.client.dto.Data;
+import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
+import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBigDecimalColumn;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractIntegerColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
@@ -92,6 +95,10 @@ public class BudgetsTablePage extends AbstractPageWithTable<Table> {
         return getColumnSet().getColumnByClass(CurrentBalanceColumn.class);
       }
 
+      public DateCreatedColumn getDateCreatedColumn() {
+        return getColumnSet().getColumnByClass(DateCreatedColumn.class);
+      }
+
       public ExpensesColumn getExpencesColumn() {
         return getColumnSet().getColumnByClass(ExpensesColumn.class);
       }
@@ -149,6 +156,11 @@ public class BudgetsTablePage extends AbstractPageWithTable<Table> {
         }
 
         @Override
+        protected void execDecorateCell(Cell cell, ITableRow row) {
+            cell.setBackgroundColor("lightcoral");
+        }
+
+        @Override
         protected int getConfiguredWidth() {
           return 100;
         }
@@ -162,8 +174,35 @@ public class BudgetsTablePage extends AbstractPageWithTable<Table> {
         }
 
         @Override
+        protected void execDecorateCell(Cell cell, ITableRow row) {
+            if (getValue(row).doubleValue() <= 0) {
+                cell.setBackgroundColor("lightcoral");
+            } else {
+                cell.setBackgroundColor("lightgreen");
+            }
+        }
+
+        @Override
         protected int getConfiguredWidth() {
           return 100;
+        }
+      }
+
+      @Order(6000)
+      public class DateCreatedColumn extends AbstractDateColumn {
+        @Override
+        protected String getConfiguredHeaderText() {
+          return TEXTS.get("DateCreated");
+        }
+
+        @Override
+        protected int getConfiguredWidth() {
+          return 100;
+        }
+
+        @Override
+        protected String getConfiguredFormat() {
+          return "dd.MM.yyyy";
         }
       }
 

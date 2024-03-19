@@ -17,10 +17,11 @@ public class BudgetsService implements IBudgetsService {
       varname1.append("       name, ");
       varname1.append("       amount, ");
       varname1.append("       expenses, ");
-      varname1.append("       current_balance ");
+      varname1.append("       current_balance, ");
+      varname1.append("       date_created ");
       varname1.append("FROM   budgets ");
       varname1.append("WHERE  is_deleted IS false ");
-      varname1.append(" INTO   :Id, :Name, :Amount, :Expenses, :CurrentBalance");
+      varname1.append(" INTO   :Id, :Name, :Amount, :Expenses, :CurrentBalance, :DateCreated");
       SQL.selectInto(varname1.toString(), pageData);
         return pageData;
     }

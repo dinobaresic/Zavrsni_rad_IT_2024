@@ -16,7 +16,7 @@ public class AddBudgetService implements IAddBudgetService {
     @Override
     public AddBudgetFormData create(AddBudgetFormData formData) {
 
-      String stmt = "INSERT INTO budgets (name, amount, expenses, current_balance) VALUES (:Name, :Amount, 0, :Amount)";
+      String stmt = "INSERT INTO budgets (name, amount, expenses, current_balance, date_created) VALUES (:Name, :Amount, 0, :Amount, now())";
       SQL.insert(stmt, formData);
       return formData;
 

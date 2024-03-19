@@ -5,6 +5,7 @@ import org.eclipse.scout.rt.shared.data.page.AbstractTablePageData;
 
 import javax.annotation.Generated;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * <b>NOTE:</b><br>
@@ -55,11 +56,13 @@ public class BudgetsTablePageData extends AbstractTablePageData {
         public static final String amount = "amount";
         public static final String expenses = "expenses";
         public static final String currentBalance = "currentBalance";
+        public static final String dateCreated = "dateCreated";
         private Integer m_id;
         private String m_name;
         private BigDecimal m_amount;
         private BigDecimal m_expenses;
         private BigDecimal m_currentBalance;
+        private Date m_dateCreated;
 
         public Integer getId() {
             return m_id;
@@ -99,6 +102,14 @@ public class BudgetsTablePageData extends AbstractTablePageData {
 
         public void setCurrentBalance(BigDecimal newCurrentBalance) {
             m_currentBalance = newCurrentBalance;
+        }
+
+        public Date getDateCreated() {
+            return m_dateCreated;
+        }
+
+        public void setDateCreated(Date newDateCreated) {
+            m_dateCreated = newDateCreated;
         }
     }
 }
