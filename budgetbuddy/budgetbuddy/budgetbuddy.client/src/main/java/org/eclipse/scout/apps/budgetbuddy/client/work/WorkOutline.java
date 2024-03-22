@@ -29,7 +29,7 @@ public class WorkOutline extends AbstractOutline {
 
   @Override
   protected String getConfiguredTitle() {
-    return TEXTS.get("Work");
+    return TEXTS.get("New");
   }
 
   @Override

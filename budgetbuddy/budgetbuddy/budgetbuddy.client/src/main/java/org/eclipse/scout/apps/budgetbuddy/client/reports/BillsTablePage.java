@@ -41,6 +41,16 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
     }
 
   @Override
+  protected String getConfiguredIconId() {
+    return Icons.List;
+  }
+
+  @Override
+  protected String getConfiguredOverviewIconId() {
+    return Icons.List;
+  }
+
+  @Override
   protected void execPageActivated() {
     execLoadData(new SearchFilter());
   }
@@ -95,7 +105,7 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
 
         @Override
         protected String getConfiguredIconId() {
-          return Icons.Star;
+          return Icons.StarBold;
         }
 
         @Override
@@ -192,6 +202,11 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
         @Override
         protected String getConfiguredHeaderText() {
           return TEXTS.get("MerchantAddress");
+        }
+
+        @Override
+        protected boolean getConfiguredAutoOptimizeWidth() {
+          return true;
         }
 
         @Override

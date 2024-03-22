@@ -1,6 +1,7 @@
 package org.eclipse.scout.apps.budgetbuddy.client.general;
 
 import org.eclipse.scout.apps.budgetbuddy.client.general.GeneralTablePage.Table;
+import org.eclipse.scout.apps.budgetbuddy.shared.Icons;
 import org.eclipse.scout.apps.budgetbuddy.shared.general.GeneralTablePageData;
 import org.eclipse.scout.apps.budgetbuddy.shared.general.IGeneralService;
 import org.eclipse.scout.rt.client.dto.Data;
@@ -23,6 +24,16 @@ public class GeneralTablePage extends AbstractPageWithTable<Table> {
     protected boolean getConfiguredLeaf() {
         return true;
     }
+
+  @Override
+  protected String getConfiguredIconId() {
+    return Icons.Calendar;
+  }
+
+  @Override
+  protected String getConfiguredOverviewIconId() {
+    return Icons.Calendar;
+  }
 
     @Override
     protected void execLoadData(SearchFilter filter) {

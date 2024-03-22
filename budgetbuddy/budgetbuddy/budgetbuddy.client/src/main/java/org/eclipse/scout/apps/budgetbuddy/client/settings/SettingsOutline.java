@@ -21,7 +21,7 @@ public class SettingsOutline extends AbstractOutline {
 
   @Override
   protected String getConfiguredTitle() {
-    return TEXTS.get("Settings");
+    return TEXTS.get("Groups");
   }
 
   @Override
@@ -32,6 +32,6 @@ public class SettingsOutline extends AbstractOutline {
 
   @Override
   protected String getConfiguredIconId() {
-    return Icons.Gear;
+    return Icons.PersonSolid;
   }
 }

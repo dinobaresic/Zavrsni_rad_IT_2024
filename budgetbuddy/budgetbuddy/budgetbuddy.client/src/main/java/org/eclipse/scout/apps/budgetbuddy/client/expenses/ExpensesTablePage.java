@@ -5,9 +5,11 @@ import org.eclipse.scout.apps.budgetbuddy.client.common.AbstractDeleteMenu;
 import org.eclipse.scout.apps.budgetbuddy.client.expenses.ExpensesTablePage.Table;
 import org.eclipse.scout.apps.budgetbuddy.client.informations.MessageBoxHelper;
 import org.eclipse.scout.apps.budgetbuddy.client.informations.NotificationHelper;
+import org.eclipse.scout.apps.budgetbuddy.shared.Icons;
 import org.eclipse.scout.apps.budgetbuddy.shared.expenses.ExpensesTablePageData;
 import org.eclipse.scout.apps.budgetbuddy.shared.expenses.IExpensesService;
 import org.eclipse.scout.apps.budgetbuddy.shared.lookups.BudgetLookupCall;
+import org.eclipse.scout.apps.budgetbuddy.shared.lookups.CategoriesLookupCall;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.IBudgetsService;
 import org.eclipse.scout.rt.client.dto.Data;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
@@ -33,6 +35,16 @@ public class ExpensesTablePage extends AbstractPageWithTable<Table> {
     protected boolean getConfiguredLeaf() {
         return true;
     }
+
+  @Override
+  protected String getConfiguredIconId() {
+    return Icons.File;
+  }
+
+  @Override
+  protected String getConfiguredOverviewIconId() {
+    return Icons.File;
+  }
 
     @Override
     protected void execLoadData(SearchFilter filter) {
@@ -148,6 +160,11 @@ public class ExpensesTablePage extends AbstractPageWithTable<Table> {
         @Override
         protected String getConfiguredHeaderText() {
           return TEXTS.get("Category");
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+          return CategoriesLookupCall.class;
         }
 
         @Override

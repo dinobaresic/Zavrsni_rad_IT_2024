@@ -1,6 +1,7 @@
 package org.eclipse.scout.apps.budgetbuddy.client.report;
 
 import org.eclipse.scout.apps.budgetbuddy.client.report.BudgetsHistoryTablePage.Table;
+import org.eclipse.scout.apps.budgetbuddy.shared.Icons;
 import org.eclipse.scout.apps.budgetbuddy.shared.report.BudgetSearchFormData;
 import org.eclipse.scout.apps.budgetbuddy.shared.report.BudgetsHistoryTablePageData;
 import org.eclipse.scout.apps.budgetbuddy.shared.report.IBudgetsHistoryService;
@@ -22,6 +23,16 @@ public class BudgetsHistoryTablePage extends AbstractPageWithTable<Table> {
     protected boolean getConfiguredLeaf() {
         return true;
     }
+
+  @Override
+  protected String getConfiguredIconId() {
+    return Icons.Clock;
+  }
+
+  @Override
+  protected String getConfiguredOverviewIconId() {
+    return Icons.Clock;
+  }
 
     @Override
     protected void execLoadData(SearchFilter filter) {

@@ -5,6 +5,7 @@ import org.eclipse.scout.apps.budgetbuddy.client.common.AbstractDeleteMenu;
 import org.eclipse.scout.apps.budgetbuddy.client.informations.MessageBoxHelper;
 import org.eclipse.scout.apps.budgetbuddy.client.informations.NotificationHelper;
 import org.eclipse.scout.apps.budgetbuddy.client.reports.BudgetsTablePage.Table;
+import org.eclipse.scout.apps.budgetbuddy.shared.Icons;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.BudgetsTablePageData;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.IBudgetsService;
 import org.eclipse.scout.rt.client.dto.Data;
@@ -29,6 +30,16 @@ public class BudgetsTablePage extends AbstractPageWithTable<Table> {
         return true;
     }
 
+  @Override
+  protected String getConfiguredIconId() {
+    return Icons.Folder;
+  }
+
+  @Override
+  protected String getConfiguredOverviewIconId() {
+    return Icons.Folder;
+  }
+
     @Override
     protected void execLoadData(SearchFilter filter) {
         importPageData(BEANS.get(IBudgetsService.class).getBudgetsTableData(filter));
@@ -38,6 +49,8 @@ public class BudgetsTablePage extends AbstractPageWithTable<Table> {
   protected void execPageActivated() {
     execLoadData(new SearchFilter());
   }
+
+
 
 
   @Override

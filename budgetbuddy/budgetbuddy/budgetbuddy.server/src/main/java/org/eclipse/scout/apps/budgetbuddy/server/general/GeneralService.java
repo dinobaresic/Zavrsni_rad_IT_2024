@@ -21,12 +21,14 @@ public class GeneralService implements IGeneralService {
         varname1.append("WHERE ");
         varname1.append("    is_deleted = false ");
         varname1.append("    AND EXTRACT(MONTH FROM date_created) = EXTRACT(MONTH FROM CURRENT_DATE) ");
+      varname1.append("    AND EXTRACT(YEAR FROM date_created) = EXTRACT(YEAR FROM CURRENT_DATE) ");
         varname1.append("GROUP BY ");
         varname1.append("    TO_CHAR(date_created, 'MM') ");
         varname1.append("ORDER BY ");
         varname1.append("    TO_CHAR(date_created, 'MM');");
         varname1.append(" INTO   :CurrentMonth, :Expenses, :Income, :Total");
         SQL.selectInto(varname1.toString(), pageData);
+
 
         return pageData;
     }
