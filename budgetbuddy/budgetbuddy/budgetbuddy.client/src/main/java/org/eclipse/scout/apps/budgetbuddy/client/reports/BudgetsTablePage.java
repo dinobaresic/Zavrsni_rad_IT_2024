@@ -55,7 +55,7 @@ public class BudgetsTablePage extends AbstractPageWithTable<Table> {
 
   @Override
     protected String getConfiguredTitle() {
-        return TEXTS.get("Budgets");
+        return TEXTS.get("Budgets0");
     }
 
     public class Table extends AbstractTable {
@@ -138,7 +138,7 @@ public class BudgetsTablePage extends AbstractPageWithTable<Table> {
       public class NameColumn extends AbstractStringColumn {
         @Override
         protected String getConfiguredHeaderText() {
-          return TEXTS.get("BudgetName");
+          return TEXTS.get("BudgetName0");
         }
 
         @Override
@@ -152,7 +152,7 @@ public class BudgetsTablePage extends AbstractPageWithTable<Table> {
       public class AmountColumn extends AbstractBigDecimalColumn {
         @Override
         protected String getConfiguredHeaderText() {
-          return TEXTS.get("Amount");
+          return TEXTS.get("Amount00");
         }
 
         @Override
@@ -165,7 +165,7 @@ public class BudgetsTablePage extends AbstractPageWithTable<Table> {
       public class ExpensesColumn extends AbstractBigDecimalColumn {
         @Override
         protected String getConfiguredHeaderText() {
-          return TEXTS.get("Expenses");
+          return TEXTS.get("Expenses0");
         }
 
         @Override
@@ -183,7 +183,7 @@ public class BudgetsTablePage extends AbstractPageWithTable<Table> {
       public class CurrentBalanceColumn extends AbstractBigDecimalColumn {
         @Override
         protected String getConfiguredHeaderText() {
-          return TEXTS.get("CurrentBalance");
+          return TEXTS.get("CurrentBalance0");
         }
 
         @Override
@@ -205,7 +205,7 @@ public class BudgetsTablePage extends AbstractPageWithTable<Table> {
       public class DateCreatedColumn extends AbstractDateColumn {
         @Override
         protected String getConfiguredHeaderText() {
-          return TEXTS.get("DateCreated");
+          return TEXTS.get("DateCreated0");
         }
 
         @Override

@@ -10,7 +10,7 @@ import org.eclipse.scout.rt.platform.util.CollectionUtility;
 public class AbstractAddMenu extends AbstractMenu {
   @Override
   protected String getConfiguredText() {
-    return TEXTS.get("Add");
+    return TEXTS.get("Add0");
   }
 
   @Override

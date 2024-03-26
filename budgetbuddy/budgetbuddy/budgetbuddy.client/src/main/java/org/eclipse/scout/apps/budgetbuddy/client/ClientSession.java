@@ -7,6 +7,8 @@ import org.eclipse.scout.rt.shared.services.common.code.CODES;
 
 import org.eclipse.scout.apps.budgetbuddy.client.Desktop;
 
+import java.util.Locale;
+
 /**
  * @author Dino
  */
@@ -28,6 +30,8 @@ public class ClientSession extends AbstractClientSession {
     //pre-load all known code types
     CODES.getAllCodeTypes("org.eclipse.scout.apps.budgetbuddy.shared");
 
+    Locale locale = new Locale("hr", "HR");
+    setLocale(locale);
     setDesktop(new Desktop());
   }
 }

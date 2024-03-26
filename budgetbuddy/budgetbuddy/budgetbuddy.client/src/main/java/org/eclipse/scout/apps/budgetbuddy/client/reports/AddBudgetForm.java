@@ -27,7 +27,7 @@ public class AddBudgetForm extends AbstractForm {
     @Override
     protected String getConfiguredTitle() {
 // TODO [Dino] verify translation
-        return TEXTS.get("AddBudget");
+        return TEXTS.get("AddBudget0");
     }
 
   public GroupBox.DataBox.AmountField getAmountField() {
@@ -70,11 +70,16 @@ public class AddBudgetForm extends AbstractForm {
               return TEXTS.get("Data");
             }
 
+            @Override
+            protected boolean getConfiguredLabelVisible() {
+              return false;
+            }
+
             @Order(1000)
             public class NameField extends AbstractStringField {
               @Override
               protected String getConfiguredLabel() {
-                return TEXTS.get("BudgetName");
+                return TEXTS.get("BudgetName0");
               }
 
               @Override
@@ -87,7 +92,7 @@ public class AddBudgetForm extends AbstractForm {
             public class AmountField extends AbstractBigDecimalField {
               @Override
               protected String getConfiguredLabel() {
-                return TEXTS.get("Amount");
+                return TEXTS.get("Amount00");
               }
 
               @Override

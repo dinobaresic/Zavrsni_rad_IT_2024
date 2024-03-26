@@ -11,7 +11,7 @@ import org.eclipse.scout.rt.platform.util.CollectionUtility;
 public class AbstractDeleteMenu extends AbstractMenu {
   @Override
   protected String getConfiguredText() {
-    return TEXTS.get("DeleteMenu");
+    return TEXTS.get("DeleteMenu0");
   }
 
   @Override

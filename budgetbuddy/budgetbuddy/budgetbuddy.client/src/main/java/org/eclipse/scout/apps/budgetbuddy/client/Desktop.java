@@ -62,12 +62,16 @@ public class Desktop extends AbstractDesktop {
   }
 
   protected void selectFirstVisibleOutline() {
+    setOutline(WorkOutline.class);
+    /*
     for (IOutline outline : getAvailableOutlines()) {
       if (outline.isEnabled() && outline.isVisible()) {
         setOutline(outline.getClass());
         return;
       }
     }
+
+     */
   }
 
   protected void onThemeChanged(PropertyChangeEvent evt) {
