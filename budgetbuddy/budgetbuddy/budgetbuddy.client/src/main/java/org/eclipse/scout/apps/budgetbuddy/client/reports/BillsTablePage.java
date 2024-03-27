@@ -100,7 +100,7 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
       public class AddBillAIMenu extends AbstractMenu {
         @Override
         protected String getConfiguredText() {
-          return TEXTS.get("AddBillAiOcr");
+          return TEXTS.get("AddBillAiOcr0");
         }
 
         @Override
@@ -188,7 +188,7 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
       public class NameColumn extends AbstractStringColumn {
         @Override
         protected String getConfiguredHeaderText() {
-          return TEXTS.get("MerchantName");
+          return TEXTS.get("MerchantName0");
         }
 
         @Override
@@ -201,7 +201,7 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
       public class AddressColumn extends AbstractStringColumn {
         @Override
         protected String getConfiguredHeaderText() {
-          return TEXTS.get("MerchantAddress");
+          return TEXTS.get("MerchantAddress0");
         }
 
         @Override
@@ -219,7 +219,7 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
       public class DateColumn extends AbstractDateColumn {
         @Override
         protected String getConfiguredHeaderText() {
-          return TEXTS.get("Date");
+          return TEXTS.get("Date0");
         }
 
         @Override
@@ -237,7 +237,7 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
       public class BudgetColumn extends AbstractSmartColumn<Long> {
         @Override
         protected String getConfiguredHeaderText() {
-          return TEXTS.get("BudgetName");
+          return TEXTS.get("BudgetName1");
         }
 
         @Override
@@ -255,7 +255,7 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
       public class TaxAmountColumn extends AbstractBigDecimalColumn {
         @Override
         protected String getConfiguredHeaderText() {
-          return TEXTS.get("TaxAmount");
+          return TEXTS.get("TaxAmount1");
         }
         @Override
         protected int getConfiguredWidth() {
@@ -268,7 +268,7 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
       public class PriceColumn extends AbstractBigDecimalColumn {
         @Override
         protected String getConfiguredHeaderText() {
-          return TEXTS.get("Price");
+          return TEXTS.get("BillPrice0");
         }
 
 

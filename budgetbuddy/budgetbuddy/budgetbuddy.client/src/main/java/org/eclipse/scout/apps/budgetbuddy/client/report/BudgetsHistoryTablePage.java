@@ -52,7 +52,7 @@ public class BudgetsHistoryTablePage extends AbstractPageWithTable<Table> {
     @Override
     protected String getConfiguredTitle() {
 // TODO [Dino] verify translation
-        return TEXTS.get("BudgetsHistory");
+        return TEXTS.get("BudgetsHistory0");
     }
 
     public class Table extends AbstractTable {
@@ -96,7 +96,7 @@ public class BudgetsHistoryTablePage extends AbstractPageWithTable<Table> {
         public class TypeColumn extends AbstractStringColumn {
             @Override
             protected String getConfiguredHeaderText() {
-                return TEXTS.get("Type");
+                return TEXTS.get("Type0");
             }
 
             @Override
@@ -109,7 +109,7 @@ public class BudgetsHistoryTablePage extends AbstractPageWithTable<Table> {
         public class DateColumn extends AbstractDateColumn {
             @Override
             protected String getConfiguredHeaderText() {
-                return TEXTS.get("Date");
+                return TEXTS.get("Date0");
             }
 
             @Override
@@ -127,7 +127,7 @@ public class BudgetsHistoryTablePage extends AbstractPageWithTable<Table> {
         public class AmountColumn extends AbstractBigDecimalColumn {
             @Override
             protected String getConfiguredHeaderText() {
-                return TEXTS.get("Amount");
+                return TEXTS.get("Amount0");
             }
 
             @Override

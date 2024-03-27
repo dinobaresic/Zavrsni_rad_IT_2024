@@ -42,7 +42,7 @@ public class GeneralTablePage extends AbstractPageWithTable<Table> {
 
     @Override
     protected String getConfiguredTitle() {
-        return TEXTS.get("CurrentMonthData");
+        return TEXTS.get("CurrentMonthData0");
     }
 
     @Override
@@ -80,7 +80,7 @@ public class GeneralTablePage extends AbstractPageWithTable<Table> {
                 return TEXTS.get("Month");
             }
 
-            @Override
+          @Override
             protected int getConfiguredWidth() {
                 return 100;
             }
@@ -90,7 +90,7 @@ public class GeneralTablePage extends AbstractPageWithTable<Table> {
         public class ExpensesColumn extends AbstractBigDecimalColumn {
             @Override
             protected String getConfiguredHeaderText() {
-                return TEXTS.get("Expenses");
+                return TEXTS.get("Expenses0");
             }
 
             @Override
@@ -108,7 +108,7 @@ public class GeneralTablePage extends AbstractPageWithTable<Table> {
         public class IncomeColumn extends AbstractBigDecimalColumn {
             @Override
             protected String getConfiguredHeaderText() {
-                return TEXTS.get("Income");
+                return TEXTS.get("Income00");
             }
 
             @Override
@@ -126,7 +126,7 @@ public class GeneralTablePage extends AbstractPageWithTable<Table> {
         public class TotalColumn extends AbstractBigDecimalColumn {
             @Override
             protected String getConfiguredHeaderText() {
-                return TEXTS.get("Total");
+                return TEXTS.get("Total0");
             }
 
             @Override

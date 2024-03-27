@@ -1,6 +1,7 @@
 package org.eclipse.scout.apps.budgetbuddy.client.settings;
 
 import org.eclipse.scout.apps.budgetbuddy.client.categories.CategoriesTablePage;
+import org.eclipse.scout.apps.budgetbuddy.client.categories.IncomeCategoryTablePage;
 import org.eclipse.scout.apps.budgetbuddy.client.expenses.ExpensesTablePage;
 import org.eclipse.scout.apps.budgetbuddy.client.reports.BillsTablePage;
 import org.eclipse.scout.apps.budgetbuddy.client.reports.BudgetsTablePage;
@@ -21,13 +22,14 @@ public class SettingsOutline extends AbstractOutline {
 
   @Override
   protected String getConfiguredTitle() {
-    return TEXTS.get("Groups");
+    return TEXTS.get("Groups0");
   }
 
   @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) {
     super.execCreateChildPages(pageList);
     pageList.add(new CategoriesTablePage());
+    pageList.add(new IncomeCategoryTablePage());
   }
 
   @Override

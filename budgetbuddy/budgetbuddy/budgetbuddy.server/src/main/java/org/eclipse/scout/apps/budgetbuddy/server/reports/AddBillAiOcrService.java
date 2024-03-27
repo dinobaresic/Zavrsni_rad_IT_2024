@@ -29,7 +29,7 @@ public class AddBillAiOcrService implements IAddBillAiOcrService {
         IntegerHolder billId = new IntegerHolder();
         billId.setValue(id);
         StringHolder type = new StringHolder();
-        type.setValue("Bill");
+        type.setValue("Račun");
         String stmt = "INSERT INTO all_expenses (name, date, type, amount, budget_id, bill_id) VALUES (:Name, :Date, :Type, :Amount, :Budget, :billId)";
         SQL.insert(stmt, formData, new NVPair("billId", billId), new NVPair("Type", type));
     }

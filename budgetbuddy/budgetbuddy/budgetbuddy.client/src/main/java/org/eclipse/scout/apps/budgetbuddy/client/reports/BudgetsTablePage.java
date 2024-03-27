@@ -6,22 +6,21 @@ import org.eclipse.scout.apps.budgetbuddy.client.informations.MessageBoxHelper;
 import org.eclipse.scout.apps.budgetbuddy.client.informations.NotificationHelper;
 import org.eclipse.scout.apps.budgetbuddy.client.reports.BudgetsTablePage.Table;
 import org.eclipse.scout.apps.budgetbuddy.shared.Icons;
+import org.eclipse.scout.apps.budgetbuddy.shared.lookups.IncomeCategoriesLookupCall;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.BudgetsTablePageData;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.IBudgetsService;
 import org.eclipse.scout.rt.client.dto.Data;
 import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBigDecimalColumn;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateColumn;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractIntegerColumn;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.*;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.client.ui.messagebox.IMessageBox;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
 @Data(BudgetsTablePageData.class)
 public class BudgetsTablePage extends AbstractPageWithTable<Table> {
@@ -116,6 +115,10 @@ public class BudgetsTablePage extends AbstractPageWithTable<Table> {
         return getColumnSet().getColumnByClass(ExpensesColumn.class);
       }
 
+      public IncomeCategoryColumn getIncomeCategoryColumn() {
+        return getColumnSet().getColumnByClass(IncomeCategoryColumn.class);
+      }
+
       public NameColumn getNameColumn() {
         return getColumnSet().getColumnByClass(NameColumn.class);
       }
@@ -134,16 +137,34 @@ public class BudgetsTablePage extends AbstractPageWithTable<Table> {
 
       }
 
-      @Order(2000)
+      @Order(1500)
       public class NameColumn extends AbstractStringColumn {
         @Override
         protected String getConfiguredHeaderText() {
-          return TEXTS.get("BudgetName0");
+          return TEXTS.get("Name1");
         }
 
         @Override
         protected int getConfiguredWidth() {
           return 100;
+        }
+      }
+
+      @Order(2000)
+      public class IncomeCategoryColumn extends AbstractSmartColumn<Long> {
+        @Override
+        protected String getConfiguredHeaderText() {
+          return TEXTS.get("CategoryName1");
+        }
+
+        @Override
+        protected int getConfiguredWidth() {
+          return 100;
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+          return IncomeCategoriesLookupCall.class;
         }
       }
 

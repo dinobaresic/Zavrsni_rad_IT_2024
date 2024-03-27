@@ -49,5 +49,25 @@ public class IncomeCategoryTablePageData extends AbstractTablePageData {
 
     public static class IncomeCategoryTableRowData extends AbstractTableRowData {
         private static final long serialVersionUID = 1L;
+        public static final String id = "id";
+        public static final String name = "name";
+        private Integer m_id;
+        private String m_name;
+
+        public Integer getId() {
+            return m_id;
+        }
+
+        public void setId(Integer newId) {
+            m_id = newId;
+        }
+
+        public String getName() {
+            return m_name;
+        }
+
+        public void setName(String newName) {
+            m_name = newName;
+        }
     }
 }

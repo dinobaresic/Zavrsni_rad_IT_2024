@@ -3,22 +3,26 @@ package org.eclipse.scout.apps.budgetbuddy.client.reports;
 import org.eclipse.scout.apps.budgetbuddy.client.reports.AddBudgetForm.MainBox.CancelButton;
 import org.eclipse.scout.apps.budgetbuddy.client.reports.AddBudgetForm.MainBox.GroupBox;
 import org.eclipse.scout.apps.budgetbuddy.client.reports.AddBudgetForm.MainBox.OkButton;
+import org.eclipse.scout.apps.budgetbuddy.shared.lookups.IncomeCategoriesLookupCall;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.AddBudgetFormData;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.CreateAddBudgetPermission;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.IAddBudgetService;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.UpdateAddBudgetPermission;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.WidgetEvent;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractSmartColumn;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.bigdecimalfield.AbstractBigDecimalField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 
 import java.math.BigDecimal;
 
@@ -54,9 +58,14 @@ public class AddBudgetForm extends AbstractForm {
     return getFieldByClass(GroupBox.DataBox.class);
   }
 
+  public GroupBox.DataBox.IncomeCategoryField getIncomeCategoryField() {
+    return getFieldByClass(GroupBox.DataBox.IncomeCategoryField.class);
+  }
+
   public GroupBox.DataBox.NameField getNameField() {
     return getFieldByClass(GroupBox.DataBox.NameField.class);
   }
+
 
   @Order(1000)
     public class MainBox extends AbstractGroupBox {
@@ -75,11 +84,12 @@ public class AddBudgetForm extends AbstractForm {
               return false;
             }
 
+
             @Order(1000)
             public class NameField extends AbstractStringField {
               @Override
               protected String getConfiguredLabel() {
-                return TEXTS.get("BudgetName0");
+                return TEXTS.get("Name1");
               }
 
               @Override
@@ -87,6 +97,20 @@ public class AddBudgetForm extends AbstractForm {
                 return 128;
               }
             }
+
+            @Order(1500)
+            public class IncomeCategoryField extends AbstractSmartField<Long> {
+              @Override
+              protected String getConfiguredLabel() {
+                return TEXTS.get("CategoryName1");
+              }
+
+              @Override
+              protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+                return IncomeCategoriesLookupCall.class;
+              }
+            }
+
 
             @Order(2000)
             public class AmountField extends AbstractBigDecimalField {

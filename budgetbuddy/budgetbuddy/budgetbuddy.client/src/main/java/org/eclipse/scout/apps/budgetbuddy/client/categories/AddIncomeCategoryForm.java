@@ -1,12 +1,12 @@
 package org.eclipse.scout.apps.budgetbuddy.client.categories;
 
-import org.eclipse.scout.apps.budgetbuddy.client.categories.AddCategoryForm.MainBox.CancelButton;
-import org.eclipse.scout.apps.budgetbuddy.client.categories.AddCategoryForm.MainBox.GroupBox;
-import org.eclipse.scout.apps.budgetbuddy.client.categories.AddCategoryForm.MainBox.OkButton;
-import org.eclipse.scout.apps.budgetbuddy.shared.categories.AddCategoryFormData;
-import org.eclipse.scout.apps.budgetbuddy.shared.categories.CreateAddCategoryPermission;
-import org.eclipse.scout.apps.budgetbuddy.shared.categories.IAddCategoryService;
-import org.eclipse.scout.apps.budgetbuddy.shared.categories.UpdateAddCategoryPermission;
+import org.eclipse.scout.apps.budgetbuddy.client.categories.AddIncomeCategoryForm.MainBox.CancelButton;
+import org.eclipse.scout.apps.budgetbuddy.client.categories.AddIncomeCategoryForm.MainBox.GroupBox;
+import org.eclipse.scout.apps.budgetbuddy.client.categories.AddIncomeCategoryForm.MainBox.OkButton;
+import org.eclipse.scout.apps.budgetbuddy.shared.categories.AddIncomeCategoryFormData;
+import org.eclipse.scout.apps.budgetbuddy.shared.categories.CreateAddIncomeCategoryPermission;
+import org.eclipse.scout.apps.budgetbuddy.shared.categories.IAddIncomeCategoryService;
+import org.eclipse.scout.apps.budgetbuddy.shared.categories.UpdateAddIncomeCategoryPermission;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
@@ -18,12 +18,12 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 
-@FormData(value = AddCategoryFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
-public class AddCategoryForm extends AbstractForm {
+@FormData(value = AddIncomeCategoryFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
+public class AddIncomeCategoryForm extends AbstractForm {
     @Override
     protected String getConfiguredTitle() {
 // TODO [Dino] verify translation
-        return TEXTS.get("AddCategory");
+        return TEXTS.get("AddIncomeCategory");
     }
 
     public MainBox getMainBox() {
@@ -42,27 +42,27 @@ public class AddCategoryForm extends AbstractForm {
         return getFieldByClass(CancelButton.class);
     }
 
-    public GroupBox.NameField getNameField() {
-        return getFieldByClass(GroupBox.NameField.class);
-    }
+  public GroupBox.NameField getNameField() {
+    return getFieldByClass(GroupBox.NameField.class);
+  }
 
-    @Order(1000)
+  @Order(1000)
     public class MainBox extends AbstractGroupBox {
         @Order(1000)
         public class GroupBox extends AbstractGroupBox {
 
-            @Order(1000)
-            public class NameField extends AbstractStringField {
-                @Override
-                protected String getConfiguredLabel() {
-                    return TEXTS.get("CategoryName1");
-                }
-
-                @Override
-                protected int getConfiguredMaxLength() {
-                    return 128;
-                }
+          @Order(1000)
+          public class NameField extends AbstractStringField {
+            @Override
+            protected String getConfiguredLabel() {
+              return TEXTS.get("CategoryName1");
             }
+
+            @Override
+            protected int getConfiguredMaxLength() {
+              return 128;
+            }
+          }
 
 
         }
@@ -89,17 +89,17 @@ public class AddCategoryForm extends AbstractForm {
     public class NewHandler extends AbstractFormHandler {
         @Override
         protected void execLoad() {
-            AddCategoryFormData formData = new AddCategoryFormData();
+            AddIncomeCategoryFormData formData = new AddIncomeCategoryFormData();
             exportFormData(formData);
-            formData = BEANS.get(IAddCategoryService.class).prepareCreate(formData);
+            formData = BEANS.get(IAddIncomeCategoryService.class).prepareCreate(formData);
             importFormData(formData);
         }
 
         @Override
         protected void execStore() {
-            AddCategoryFormData formData = new AddCategoryFormData();
+            AddIncomeCategoryFormData formData = new AddIncomeCategoryFormData();
             exportFormData(formData);
-            formData = BEANS.get(IAddCategoryService.class).create(formData);
+            formData = BEANS.get(IAddIncomeCategoryService.class).create(formData);
             importFormData(formData);
         }
     }
@@ -107,18 +107,17 @@ public class AddCategoryForm extends AbstractForm {
     public class ModifyHandler extends AbstractFormHandler {
         @Override
         protected void execLoad() {
-            AddCategoryFormData formData = new AddCategoryFormData();
+            AddIncomeCategoryFormData formData = new AddIncomeCategoryFormData();
             exportFormData(formData);
-            formData = BEANS.get(IAddCategoryService.class).load(formData);
+            formData = BEANS.get(IAddIncomeCategoryService.class).load(formData);
             importFormData(formData);
-
         }
 
         @Override
         protected void execStore() {
-            AddCategoryFormData formData = new AddCategoryFormData();
+            AddIncomeCategoryFormData formData = new AddIncomeCategoryFormData();
             exportFormData(formData);
-            formData = BEANS.get(IAddCategoryService.class).store(formData);
+            formData = BEANS.get(IAddIncomeCategoryService.class).store(formData);
             importFormData(formData);
         }
     }

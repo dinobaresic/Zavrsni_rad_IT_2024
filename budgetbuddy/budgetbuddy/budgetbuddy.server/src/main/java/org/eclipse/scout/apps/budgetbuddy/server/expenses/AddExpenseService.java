@@ -29,7 +29,7 @@ public class AddExpenseService implements IAddExpenseService {
         IntegerHolder expenseId = new IntegerHolder();
         expenseId.setValue(id);
         StringHolder type = new StringHolder();
-        type.setValue("Particular Expense");
+        type.setValue("Posebni trošak");
         String stmt = "INSERT INTO all_expenses (name, date, type, amount, budget_id, expense_id) VALUES (:Name, :Date, :Type, :Amount, :Budget, :ExpenseId)";
         SQL.insert(stmt, formData, new NVPair("ExpenseId", expenseId), new NVPair("Type", type));
     }

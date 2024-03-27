@@ -53,12 +53,14 @@ public class BudgetsTablePageData extends AbstractTablePageData {
         private static final long serialVersionUID = 1L;
         public static final String id = "id";
         public static final String name = "name";
+        public static final String incomeCategory = "incomeCategory";
         public static final String amount = "amount";
         public static final String expenses = "expenses";
         public static final String currentBalance = "currentBalance";
         public static final String dateCreated = "dateCreated";
         private Integer m_id;
         private String m_name;
+        private Long m_incomeCategory;
         private BigDecimal m_amount;
         private BigDecimal m_expenses;
         private BigDecimal m_currentBalance;
@@ -78,6 +80,14 @@ public class BudgetsTablePageData extends AbstractTablePageData {
 
         public void setName(String newName) {
             m_name = newName;
+        }
+
+        public Long getIncomeCategory() {
+            return m_incomeCategory;
+        }
+
+        public void setIncomeCategory(Long newIncomeCategory) {
+            m_incomeCategory = newIncomeCategory;
         }
 
         public BigDecimal getAmount() {

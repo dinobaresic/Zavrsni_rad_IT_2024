@@ -24,7 +24,7 @@ public class SearchOutline extends AbstractOutline {
 
   @Override
   protected String getConfiguredTitle() {
-    return TEXTS.get("Reports");
+    return TEXTS.get("Reports0");
   }
 
   @Override

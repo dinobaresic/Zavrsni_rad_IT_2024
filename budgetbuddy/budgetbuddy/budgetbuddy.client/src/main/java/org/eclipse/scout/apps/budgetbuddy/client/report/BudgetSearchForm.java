@@ -4,6 +4,7 @@ import org.eclipse.scout.apps.budgetbuddy.client.report.BudgetSearchForm.MainBox
 import org.eclipse.scout.apps.budgetbuddy.client.report.BudgetSearchForm.MainBox.GroupBox;
 import org.eclipse.scout.apps.budgetbuddy.client.report.BudgetSearchForm.MainBox.OkButton;
 import org.eclipse.scout.apps.budgetbuddy.shared.lookups.BudgetLookupCall;
+import org.eclipse.scout.apps.budgetbuddy.shared.lookups.IncomeCategoriesLookupCall;
 import org.eclipse.scout.apps.budgetbuddy.shared.report.BudgetSearchFormData;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractSearchForm;
@@ -54,7 +55,7 @@ public class BudgetSearchForm extends AbstractSearchForm {
             public class BudgetField extends AbstractSmartField<Long> {
                 @Override
                 protected String getConfiguredLabel() {
-                    return TEXTS.get("Budget");
+                    return TEXTS.get("Income0");
                 }
 
                 @Override
@@ -66,7 +67,7 @@ public class BudgetSearchForm extends AbstractSearchForm {
                 protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
                     return BudgetLookupCall.class;
                 }
-                
+
             }
 
 

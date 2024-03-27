@@ -38,7 +38,7 @@ public class CategoriesTablePage extends AbstractPageWithTable<Table> {
     @Override
     protected String getConfiguredTitle() {
 // TODO [Dino] verify translation
-        return TEXTS.get("CategoriesTablePage0");
+        return TEXTS.get("CategoriesTablePage00");
     }
 
     public class Table extends AbstractTable {
@@ -94,7 +94,7 @@ public class CategoriesTablePage extends AbstractPageWithTable<Table> {
       public class NameColumn extends AbstractStringColumn {
         @Override
         protected String getConfiguredHeaderText() {
-          return TEXTS.get("CategoryName");
+          return TEXTS.get("CategoryName1");
         }
 
         @Override

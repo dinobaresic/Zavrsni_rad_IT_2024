@@ -18,11 +18,19 @@ public class AddBudgetFormData extends AbstractFormData {
         return getFieldByClass(Amount.class);
     }
 
+    public IncomeCategory getIncomeCategory() {
+        return getFieldByClass(IncomeCategory.class);
+    }
+
     public Name getName() {
         return getFieldByClass(Name.class);
     }
 
     public static class Amount extends AbstractValueFieldData<BigDecimal> {
+        private static final long serialVersionUID = 1L;
+    }
+
+    public static class IncomeCategory extends AbstractValueFieldData<Long> {
         private static final long serialVersionUID = 1L;
     }
 

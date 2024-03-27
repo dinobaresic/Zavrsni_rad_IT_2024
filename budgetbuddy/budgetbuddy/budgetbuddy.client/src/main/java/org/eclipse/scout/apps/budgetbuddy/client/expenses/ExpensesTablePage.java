@@ -10,6 +10,7 @@ import org.eclipse.scout.apps.budgetbuddy.shared.expenses.ExpensesTablePageData;
 import org.eclipse.scout.apps.budgetbuddy.shared.expenses.IExpensesService;
 import org.eclipse.scout.apps.budgetbuddy.shared.lookups.BudgetLookupCall;
 import org.eclipse.scout.apps.budgetbuddy.shared.lookups.CategoriesLookupCall;
+import org.eclipse.scout.apps.budgetbuddy.shared.lookups.IncomeCategoriesLookupCall;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.IBudgetsService;
 import org.eclipse.scout.rt.client.dto.Data;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
@@ -146,7 +147,7 @@ public class ExpensesTablePage extends AbstractPageWithTable<Table> {
       public class NameColumn extends AbstractStringColumn {
         @Override
         protected String getConfiguredHeaderText() {
-          return TEXTS.get("ExpenseName");
+          return TEXTS.get("ExpenseName0");
         }
 
         @Override
@@ -159,7 +160,7 @@ public class ExpensesTablePage extends AbstractPageWithTable<Table> {
       public class CategoryColumn extends AbstractSmartColumn<Long> {
         @Override
         protected String getConfiguredHeaderText() {
-          return TEXTS.get("Category");
+          return TEXTS.get("ExpenseCategory0");
         }
 
         @Override
@@ -177,7 +178,7 @@ public class ExpensesTablePage extends AbstractPageWithTable<Table> {
       public class DateColumn extends AbstractDateColumn {
         @Override
         protected String getConfiguredHeaderText() {
-          return TEXTS.get("Date");
+          return TEXTS.get("Date0");
         }
 
         @Override
@@ -195,7 +196,7 @@ public class ExpensesTablePage extends AbstractPageWithTable<Table> {
       public class BudgetColumn extends AbstractSmartColumn<Long> {
         @Override
         protected String getConfiguredHeaderText() {
-          return TEXTS.get("Budget");
+          return TEXTS.get("BudgetName0");
         }
 
         @Override
@@ -213,7 +214,7 @@ public class ExpensesTablePage extends AbstractPageWithTable<Table> {
       public class AmountColumn extends AbstractBigDecimalColumn {
         @Override
         protected String getConfiguredHeaderText() {
-          return TEXTS.get("Amount");
+          return TEXTS.get("AmountExpense");
         }
 
         @Override
