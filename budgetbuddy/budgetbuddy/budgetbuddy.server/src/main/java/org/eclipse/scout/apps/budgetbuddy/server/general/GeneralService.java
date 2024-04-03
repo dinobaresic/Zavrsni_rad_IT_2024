@@ -15,29 +15,25 @@ public class GeneralService implements IGeneralService {
 
     StringBuffer  varname1 = new StringBuffer();
     varname1.append("SELECT ");
-    varname1.append("    TO_CHAR(date_created, 'MM') AS currentMonth, ");
-    varname1.append("    COALESCE(SUM(expenses), 0) AS totalExpenses, ");
-    varname1.append("    COALESCE(SUM(amount), 0) AS totalIncome, ");
-    varname1.append("    COALESCE(SUM(amount), 0) - COALESCE(SUM(expenses), 0) AS Total ");
+    varname1.append("    COALESCE(SUM(amount), 0) AS totalIncome ");
     varname1.append("FROM ");
     varname1.append("    budgets ");
-    varname1.append("WHERE ");
-    /*
-    if (filter.getBudget().getValue() != null) {
-      varname1.append(" WHERE  budget_id = " + filter.getBudget().getValue() + " ");
+    varname1.append("WHERE is_deleted = false ");
+    if (filter.getWallet() != null) {
+      varname1.append(" AND  wallet_id = " + filter.getWallet().getValue() + " ");
     }
 
-     */
-    varname1.append("    is_deleted = false ");
-    varname1.append("    AND EXTRACT(MONTH FROM date_created) = EXTRACT(MONTH FROM CURRENT_DATE) ");
-    varname1.append("    AND EXTRACT(YEAR FROM date_created) = EXTRACT(YEAR FROM CURRENT_DATE) ");
-    varname1.append("GROUP BY ");
-    varname1.append("    TO_CHAR(date_created, 'MM') ");
-    varname1.append("ORDER BY ");
-    varname1.append("    TO_CHAR(date_created, 'MM');");
-    varname1.append(" INTO   :CurrentMonth, :Expenses, :Income, :Total");
+    if (filter.getFrom().getValue() != null) {
+      varname1.append(" AND  date_created >= '" + filter.getFrom().getValue() + "' ");
+    }
 
-    SQL.selectInto(varname1.toString(), pageData);
+    if (filter.getTo().getValue() != null) {
+        varname1.append(" AND  date_created <= '" + filter.getTo().getValue() + "' ");
+    }
+
+    varname1.append(" INTO  :Income");
+
+    SQL.selectInto(varname1.toString(), pageData, filter);
 
 
 

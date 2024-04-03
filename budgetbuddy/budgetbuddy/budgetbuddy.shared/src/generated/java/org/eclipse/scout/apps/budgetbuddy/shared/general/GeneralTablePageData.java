@@ -50,30 +50,8 @@ public class GeneralTablePageData extends AbstractTablePageData {
 
     public static class GeneralTableRowData extends AbstractTableRowData {
         private static final long serialVersionUID = 1L;
-        public static final String currentMonth = "currentMonth";
-        public static final String expenses = "expenses";
         public static final String income = "income";
-        public static final String total = "total";
-        private String m_currentMonth;
-        private BigDecimal m_expenses;
         private BigDecimal m_income;
-        private BigDecimal m_total;
-
-        public String getCurrentMonth() {
-            return m_currentMonth;
-        }
-
-        public void setCurrentMonth(String newCurrentMonth) {
-            m_currentMonth = newCurrentMonth;
-        }
-
-        public BigDecimal getExpenses() {
-            return m_expenses;
-        }
-
-        public void setExpenses(BigDecimal newExpenses) {
-            m_expenses = newExpenses;
-        }
 
         public BigDecimal getIncome() {
             return m_income;
@@ -81,14 +59,6 @@ public class GeneralTablePageData extends AbstractTablePageData {
 
         public void setIncome(BigDecimal newIncome) {
             m_income = newIncome;
-        }
-
-        public BigDecimal getTotal() {
-            return m_total;
-        }
-
-        public void setTotal(BigDecimal newTotal) {
-            m_total = newTotal;
         }
     }
 }

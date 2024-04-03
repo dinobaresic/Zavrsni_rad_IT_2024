@@ -18,6 +18,10 @@ public class AddBudgetFormData extends AbstractFormData {
         return getFieldByClass(Amount.class);
     }
 
+    public Date getDate() {
+        return getFieldByClass(Date.class);
+    }
+
     public IncomeCategory getIncomeCategory() {
         return getFieldByClass(IncomeCategory.class);
     }
@@ -31,6 +35,10 @@ public class AddBudgetFormData extends AbstractFormData {
     }
 
     public static class Amount extends AbstractValueFieldData<BigDecimal> {
+        private static final long serialVersionUID = 1L;
+    }
+
+    public static class Date extends AbstractValueFieldData<java.util.Date> {
         private static final long serialVersionUID = 1L;
     }
 

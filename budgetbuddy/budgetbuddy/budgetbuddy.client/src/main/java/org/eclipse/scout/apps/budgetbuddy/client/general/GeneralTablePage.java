@@ -54,12 +54,12 @@ public class GeneralTablePage extends AbstractPageWithTable<Table> {
 
   @Override
     protected String getConfiguredTitle() {
-        return TEXTS.get("CurrentMonthData0");
+        return TEXTS.get("ReportWalletAndDate");
     }
 
     @Override
-    protected void execPageActivated() {
-        execLoadData(new SearchFilter());
+    protected boolean getConfiguredSearchRequired() {
+        return true;
     }
 
     public class Table extends AbstractTable {
@@ -69,54 +69,15 @@ public class GeneralTablePage extends AbstractPageWithTable<Table> {
             return true;
         }
 
-        public CurrentMonthColumn getCurrentMonthColumn() {
-            return getColumnSet().getColumnByClass(CurrentMonthColumn.class);
-        }
-
-        public ExpensesColumn getExpensesColumn() {
-            return getColumnSet().getColumnByClass(ExpensesColumn.class);
-        }
 
         public IncomeColumn getIncomeColumn() {
             return getColumnSet().getColumnByClass(IncomeColumn.class);
         }
 
-        public TotalColumn getTotalColumn() {
-            return getColumnSet().getColumnByClass(TotalColumn.class);
-        }
 
-        @Order(1000)
-        public class CurrentMonthColumn extends AbstractStringColumn {
-            @Override
-            protected String getConfiguredHeaderText() {
-                return TEXTS.get("Month");
-            }
 
-          @Override
-            protected int getConfiguredWidth() {
-                return 100;
-            }
-        }
 
         @Order(2000)
-        public class ExpensesColumn extends AbstractBigDecimalColumn {
-            @Override
-            protected String getConfiguredHeaderText() {
-                return TEXTS.get("Expenses0");
-            }
-
-            @Override
-            protected void execDecorateCell(Cell cell, ITableRow row) {
-                cell.setBackgroundColor("lightcoral");
-            }
-
-            @Override
-            protected int getConfiguredWidth() {
-                return 100;
-            }
-        }
-
-        @Order(3000)
         public class IncomeColumn extends AbstractBigDecimalColumn {
             @Override
             protected String getConfiguredHeaderText() {
@@ -134,32 +95,6 @@ public class GeneralTablePage extends AbstractPageWithTable<Table> {
             }
         }
 
-        @Order(4000)
-        public class TotalColumn extends AbstractBigDecimalColumn {
-            @Override
-            protected String getConfiguredHeaderText() {
-                return TEXTS.get("Total0");
-            }
 
-            @Override
-            protected void execDecorateCell(Cell cell, ITableRow row) {
-                if(getExpensesColumn().getValue(row) != null && getIncomeColumn().getValue(row) != null) {
-                    BigDecimal expenses = getExpensesColumn().getValue(row);
-                    BigDecimal income = getIncomeColumn().getValue(row);
-                    BigDecimal total = income.subtract(expenses);
-                    if(total.compareTo(BigDecimal.ZERO) <= 0) {
-                        cell.setBackgroundColor("lightcoral");
-                    }
-                    else {
-                        cell.setBackgroundColor("lightgreen");
-                    }
-                }
-            }
-
-            @Override
-            protected int getConfiguredWidth() {
-                return 100;
-            }
-        }
     }
 }

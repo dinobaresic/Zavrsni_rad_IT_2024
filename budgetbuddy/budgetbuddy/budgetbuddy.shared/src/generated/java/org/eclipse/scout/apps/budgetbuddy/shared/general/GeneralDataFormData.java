@@ -14,19 +14,27 @@ import java.util.Date;
 public class GeneralDataFormData extends AbstractFormData {
     private static final long serialVersionUID = 1L;
 
-    public DateFrom getDateFrom() {
-        return getFieldByClass(DateFrom.class);
+    public From getFrom() {
+        return getFieldByClass(From.class);
     }
 
-    public DateTo getDateTo() {
-        return getFieldByClass(DateTo.class);
+    public To getTo() {
+        return getFieldByClass(To.class);
     }
 
-    public static class DateFrom extends AbstractValueFieldData<Date> {
+    public Wallet getWallet() {
+        return getFieldByClass(Wallet.class);
+    }
+
+    public static class From extends AbstractValueFieldData<Date> {
         private static final long serialVersionUID = 1L;
     }
 
-    public static class DateTo extends AbstractValueFieldData<Date> {
+    public static class To extends AbstractValueFieldData<Date> {
+        private static final long serialVersionUID = 1L;
+    }
+
+    public static class Wallet extends AbstractValueFieldData<Long> {
         private static final long serialVersionUID = 1L;
     }
 }

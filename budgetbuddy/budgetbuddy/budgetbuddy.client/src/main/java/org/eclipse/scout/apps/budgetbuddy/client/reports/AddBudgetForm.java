@@ -17,6 +17,7 @@ import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.bigdecimalfield.AbstractBigDecimalField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
+import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
@@ -59,7 +60,11 @@ public class AddBudgetForm extends AbstractForm {
     return getFieldByClass(GroupBox.DataBox.class);
   }
 
-  public GroupBox.DataBox.IncomeCategoryField getIncomeCategoryField() {
+    public GroupBox.DataBox.DateField getDateField() {
+        return getFieldByClass(GroupBox.DataBox.DateField.class);
+    }
+
+    public GroupBox.DataBox.IncomeCategoryField getIncomeCategoryField() {
     return getFieldByClass(GroupBox.DataBox.IncomeCategoryField.class);
   }
 
@@ -115,6 +120,19 @@ public class AddBudgetForm extends AbstractForm {
                 return IncomeCategoriesLookupCall.class;
               }
             }
+
+              @Order(1750)
+              public class DateField extends AbstractDateField {
+                  @Override
+                  protected String getConfiguredLabel() {
+                      return TEXTS.get("Date0");
+                  }
+
+                  @Override
+                  protected boolean getConfiguredMandatory() {
+                      return true;
+                  }
+              }
 
 
             @Order(2000)
