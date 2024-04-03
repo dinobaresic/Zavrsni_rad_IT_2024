@@ -7,6 +7,7 @@ import org.eclipse.scout.apps.budgetbuddy.client.informations.NotificationHelper
 import org.eclipse.scout.apps.budgetbuddy.client.reports.BudgetsTablePage.Table;
 import org.eclipse.scout.apps.budgetbuddy.shared.Icons;
 import org.eclipse.scout.apps.budgetbuddy.shared.lookups.IncomeCategoriesLookupCall;
+import org.eclipse.scout.apps.budgetbuddy.shared.lookups.WalletLookupCall;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.BudgetsTablePageData;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.IBudgetsService;
 import org.eclipse.scout.rt.client.dto.Data;
@@ -103,17 +104,11 @@ public class BudgetsTablePage extends AbstractPageWithTable<Table> {
         return getColumnSet().getColumnByClass(AmountColumn.class);
       }
 
-      public CurrentBalanceColumn getCurrentBalanceColumn() {
-        return getColumnSet().getColumnByClass(CurrentBalanceColumn.class);
-      }
 
       public DateCreatedColumn getDateCreatedColumn() {
         return getColumnSet().getColumnByClass(DateCreatedColumn.class);
       }
 
-      public ExpensesColumn getExpencesColumn() {
-        return getColumnSet().getColumnByClass(ExpensesColumn.class);
-      }
 
       public IncomeCategoryColumn getIncomeCategoryColumn() {
         return getColumnSet().getColumnByClass(IncomeCategoryColumn.class);
@@ -121,6 +116,10 @@ public class BudgetsTablePage extends AbstractPageWithTable<Table> {
 
       public NameColumn getNameColumn() {
         return getColumnSet().getColumnByClass(NameColumn.class);
+      }
+
+      public WalletColumn getWalletColumn() {
+        return getColumnSet().getColumnByClass(WalletColumn.class);
       }
 
       @Order(1000)
@@ -177,43 +176,10 @@ public class BudgetsTablePage extends AbstractPageWithTable<Table> {
         }
 
         @Override
-        protected int getConfiguredWidth() {
-          return 100;
-        }
-      }
-
-      @Order(4000)
-      public class ExpensesColumn extends AbstractBigDecimalColumn {
-        @Override
-        protected String getConfiguredHeaderText() {
-          return TEXTS.get("Expenses0");
-        }
-
-        @Override
         protected void execDecorateCell(Cell cell, ITableRow row) {
-            cell.setBackgroundColor("lightcoral");
-        }
-
-        @Override
-        protected int getConfiguredWidth() {
-          return 100;
-        }
-      }
-
-      @Order(5000)
-      public class CurrentBalanceColumn extends AbstractBigDecimalColumn {
-        @Override
-        protected String getConfiguredHeaderText() {
-          return TEXTS.get("CurrentBalance0");
-        }
-
-        @Override
-        protected void execDecorateCell(Cell cell, ITableRow row) {
-            if (getValue(row).doubleValue() <= 0) {
-                cell.setBackgroundColor("lightcoral");
-            } else {
-                cell.setBackgroundColor("lightgreen");
-            }
+          if (cell.getValue() != null) {
+            cell.setBackgroundColor("C0FFC0");
+          }
         }
 
         @Override
@@ -237,6 +203,24 @@ public class BudgetsTablePage extends AbstractPageWithTable<Table> {
         @Override
         protected String getConfiguredFormat() {
           return "dd.MM.yyyy";
+        }
+      }
+
+      @Order(7000)
+      public class WalletColumn extends AbstractSmartColumn<Long> {
+        @Override
+        protected String getConfiguredHeaderText() {
+          return TEXTS.get("WalletTablePage");
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+          return WalletLookupCall.class;
+        }
+
+        @Override
+        protected int getConfiguredWidth() {
+          return 100;
         }
       }
 

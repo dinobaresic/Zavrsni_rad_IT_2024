@@ -55,13 +55,13 @@ public class ExpensesTablePageData extends AbstractTablePageData {
         public static final String name = "name";
         public static final String category = "category";
         public static final String date = "date";
-        public static final String budget = "budget";
+        public static final String wallet = "wallet";
         public static final String amount = "amount";
         private Integer m_ID;
         private String m_name;
         private Long m_category;
         private Date m_date;
-        private Long m_budget;
+        private Long m_wallet;
         private BigDecimal m_amount;
 
         public Integer getID() {
@@ -96,12 +96,12 @@ public class ExpensesTablePageData extends AbstractTablePageData {
             m_date = newDate;
         }
 
-        public Long getBudget() {
-            return m_budget;
+        public Long getWallet() {
+            return m_wallet;
         }
 
-        public void setBudget(Long newBudget) {
-            m_budget = newBudget;
+        public void setWallet(Long newWallet) {
+            m_wallet = newWallet;
         }
 
         public BigDecimal getAmount() {

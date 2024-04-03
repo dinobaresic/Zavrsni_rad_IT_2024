@@ -11,12 +11,15 @@ import org.eclipse.scout.apps.budgetbuddy.shared.expenses.IExpensesService;
 import org.eclipse.scout.apps.budgetbuddy.shared.lookups.BudgetLookupCall;
 import org.eclipse.scout.apps.budgetbuddy.shared.lookups.CategoriesLookupCall;
 import org.eclipse.scout.apps.budgetbuddy.shared.lookups.IncomeCategoriesLookupCall;
+import org.eclipse.scout.apps.budgetbuddy.shared.lookups.WalletLookupCall;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.IBudgetsService;
 import org.eclipse.scout.rt.client.dto.Data;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
+import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
+import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.*;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.client.ui.messagebox.IMessageBox;
@@ -69,9 +72,12 @@ public class ExpensesTablePage extends AbstractPageWithTable<Table> {
             form.startNew();
             form.waitFor();
             if (form.isFormStored()) {
+              /* //TODO
               BigDecimal amount = form.getAmountField().getValue();
               Long budgetId = form.getBudgetField().getValue();
               BEANS.get(IBudgetsService.class).substractBudgetAmount(amount, budgetId);
+
+               */
               NotificationHelper.showSaveSuccessNotification();
               reloadPage();
             }
@@ -103,9 +109,6 @@ public class ExpensesTablePage extends AbstractPageWithTable<Table> {
         return getColumnSet().getColumnByClass(AmountColumn.class);
       }
 
-      public BudgetColumn getBudgetColumn() {
-        return getColumnSet().getColumnByClass(BudgetColumn.class);
-      }
 
       public CategoryColumn getCategotryColumn() {
         return getColumnSet().getColumnByClass(CategoryColumn.class);
@@ -121,6 +124,10 @@ public class ExpensesTablePage extends AbstractPageWithTable<Table> {
 
       public  IDColumn getIdColumn() {
         return getColumnSet().getColumnByClass(IDColumn.class);
+      }
+
+      public WalletColumn getWalletColumn() {
+        return getColumnSet().getColumnByClass(WalletColumn.class);
       }
 
 
@@ -193,15 +200,15 @@ public class ExpensesTablePage extends AbstractPageWithTable<Table> {
       }
 
       @Order(5000)
-      public class BudgetColumn extends AbstractSmartColumn<Long> {
+      public class WalletColumn extends AbstractSmartColumn<Long> {
         @Override
         protected String getConfiguredHeaderText() {
-          return TEXTS.get("BudgetName0");
+          return TEXTS.get("WalletTablePage");
         }
 
         @Override
         protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
-          return BudgetLookupCall.class;
+          return WalletLookupCall.class;
         }
 
         @Override
@@ -217,6 +224,12 @@ public class ExpensesTablePage extends AbstractPageWithTable<Table> {
           return TEXTS.get("AmountExpense");
         }
 
+        @Override
+        protected void execDecorateCell(Cell cell, ITableRow row) {
+          if (cell.getValue() != null) {
+            cell.setBackgroundColor("FFC0C0");
+          }
+        }
         @Override
         protected int getConfiguredWidth() {
           return 100;

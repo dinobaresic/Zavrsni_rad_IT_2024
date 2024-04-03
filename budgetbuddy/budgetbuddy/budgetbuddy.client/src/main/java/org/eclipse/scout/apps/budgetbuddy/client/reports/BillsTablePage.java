@@ -7,6 +7,7 @@ import org.eclipse.scout.apps.budgetbuddy.client.informations.NotificationHelper
 import org.eclipse.scout.apps.budgetbuddy.client.reports.BillsTablePage.Table;
 import org.eclipse.scout.apps.budgetbuddy.shared.Icons;
 import org.eclipse.scout.apps.budgetbuddy.shared.lookups.BudgetLookupCall;
+import org.eclipse.scout.apps.budgetbuddy.shared.lookups.WalletLookupCall;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.BillsTablePageData;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.IBillsService;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.IBudgetsService;
@@ -14,7 +15,9 @@ import org.eclipse.scout.rt.client.dto.Data;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
+import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
+import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.*;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.client.ui.messagebox.IMessageBox;
@@ -87,9 +90,7 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
           form.startNew();
           form.waitFor();
           if(form.isFormStored()) {
-            BigDecimal amount = form.getAmountField().getValue();
-            Long budgetId = form.getBudgetField().getValue();
-            BEANS.get(IBudgetsService.class).substractBudgetAmount(amount, budgetId);
+
             NotificationHelper.showSaveSuccessNotification();
             reloadPage();
           }
@@ -119,9 +120,7 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
             form.startNew();
             form.waitFor();
             if(form.isFormStored()) {
-              BigDecimal amount = form.getAmountField().getValue();
-              Long budgetId = form.getBudgetField().getValue();
-              BEANS.get(IBudgetsService.class).substractBudgetAmount(amount, budgetId);
+
                 NotificationHelper.showSaveSuccessNotification();
                 reloadPage();
             }
@@ -145,9 +144,6 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
         return getColumnSet().getColumnByClass(AddressColumn.class);
       }
 
-      public BudgetColumn getBudgetColumn() {
-        return getColumnSet().getColumnByClass(BudgetColumn.class);
-      }
 
 
       public DateColumn getDateColumn() {
@@ -166,6 +162,10 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
 
       public IdColumn getIdColumn() {
         return getColumnSet().getColumnByClass(IdColumn.class);
+      }
+
+      public WalletColumn getWalletColumn() {
+        return getColumnSet().getColumnByClass(WalletColumn.class);
       }
 
       @Order(1000)
@@ -233,16 +233,17 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
         }
 
       }
+
       @Order(5000)
-      public class BudgetColumn extends AbstractSmartColumn<Long> {
+      public class WalletColumn extends AbstractSmartColumn<Long> {
         @Override
         protected String getConfiguredHeaderText() {
-          return TEXTS.get("BudgetName1");
+          return TEXTS.get("WalletTablePage");
         }
 
         @Override
         protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
-          return BudgetLookupCall.class;
+          return WalletLookupCall.class;
         }
 
         @Override
@@ -271,6 +272,12 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
           return TEXTS.get("BillPrice0");
         }
 
+        @Override
+        protected void execDecorateCell(Cell cell, ITableRow row) {
+          if (cell.getValue() != null) {
+              cell.setBackgroundColor("FFC0C0");
+          }
+        }
 
         @Override
         protected int getConfiguredWidth() {

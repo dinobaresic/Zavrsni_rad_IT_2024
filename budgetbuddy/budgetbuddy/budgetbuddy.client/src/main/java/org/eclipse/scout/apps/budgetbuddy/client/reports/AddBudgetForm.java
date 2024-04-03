@@ -4,6 +4,7 @@ import org.eclipse.scout.apps.budgetbuddy.client.reports.AddBudgetForm.MainBox.C
 import org.eclipse.scout.apps.budgetbuddy.client.reports.AddBudgetForm.MainBox.GroupBox;
 import org.eclipse.scout.apps.budgetbuddy.client.reports.AddBudgetForm.MainBox.OkButton;
 import org.eclipse.scout.apps.budgetbuddy.shared.lookups.IncomeCategoriesLookupCall;
+import org.eclipse.scout.apps.budgetbuddy.shared.lookups.WalletLookupCall;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.AddBudgetFormData;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.CreateAddBudgetPermission;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.IAddBudgetService;
@@ -64,6 +65,10 @@ public class AddBudgetForm extends AbstractForm {
 
   public GroupBox.DataBox.NameField getNameField() {
     return getFieldByClass(GroupBox.DataBox.NameField.class);
+  }
+
+  public GroupBox.DataBox.WalletField getWalletField() {
+    return getFieldByClass(GroupBox.DataBox.WalletField.class);
   }
 
 
@@ -127,6 +132,23 @@ public class AddBudgetForm extends AbstractForm {
               @Override
               protected BigDecimal getConfiguredMaxValue() {
                 return new BigDecimal("999999999999999999");
+              }
+            }
+
+            @Order(3000)
+            public class WalletField extends AbstractSmartField<Long> {
+              @Override
+              protected String getConfiguredLabel() {
+                return TEXTS.get("WalletTablePage");
+              }
+
+              @Override
+              protected boolean getConfiguredMandatory() {
+                return true;
+              }
+              @Override
+              protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+                return WalletLookupCall.class;
               }
             }
 

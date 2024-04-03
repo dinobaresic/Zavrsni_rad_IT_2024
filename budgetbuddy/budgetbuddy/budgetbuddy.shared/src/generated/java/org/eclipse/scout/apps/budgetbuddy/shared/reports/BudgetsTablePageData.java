@@ -55,16 +55,14 @@ public class BudgetsTablePageData extends AbstractTablePageData {
         public static final String name = "name";
         public static final String incomeCategory = "incomeCategory";
         public static final String amount = "amount";
-        public static final String expenses = "expenses";
-        public static final String currentBalance = "currentBalance";
         public static final String dateCreated = "dateCreated";
+        public static final String wallet = "wallet";
         private Integer m_id;
         private String m_name;
         private Long m_incomeCategory;
         private BigDecimal m_amount;
-        private BigDecimal m_expenses;
-        private BigDecimal m_currentBalance;
         private Date m_dateCreated;
+        private Long m_wallet;
 
         public Integer getId() {
             return m_id;
@@ -98,28 +96,20 @@ public class BudgetsTablePageData extends AbstractTablePageData {
             m_amount = newAmount;
         }
 
-        public BigDecimal getExpenses() {
-            return m_expenses;
-        }
-
-        public void setExpenses(BigDecimal newExpenses) {
-            m_expenses = newExpenses;
-        }
-
-        public BigDecimal getCurrentBalance() {
-            return m_currentBalance;
-        }
-
-        public void setCurrentBalance(BigDecimal newCurrentBalance) {
-            m_currentBalance = newCurrentBalance;
-        }
-
         public Date getDateCreated() {
             return m_dateCreated;
         }
 
         public void setDateCreated(Date newDateCreated) {
             m_dateCreated = newDateCreated;
+        }
+
+        public Long getWallet() {
+            return m_wallet;
+        }
+
+        public void setWallet(Long newWallet) {
+            m_wallet = newWallet;
         }
     }
 }

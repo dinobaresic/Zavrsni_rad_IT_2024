@@ -18,21 +18,14 @@ public class AddExpenseService implements IAddExpenseService {
 
     @Override
     public AddExpenseFormData create(AddExpenseFormData formData) {
-        IntegerHolder expenseId = new IntegerHolder();
-        String stmt = "INSERT INTO expenses (name, date, budget_id, category_id, amount) VALUES (:Name, :Date, :Budget, :Category, :Amount) RETURNING id INTO :expenseId";
-        SQL.selectInto(stmt, formData, new NVPair("expenseId", expenseId));
-        insertIntoAllExpenses(formData, expenseId.getValue());
+      String insertStmt = "INSERT INTO expenses (name, date, category_id, amount, wallet_id) VALUES (:Name, :Date, :Category, :Amount, :Wallet)";
+      SQL.insert(insertStmt, formData);
+
+      String updateStmt = "UPDATE wallet SET balance = balance - :Amount, last_used = now() WHERE id = :Wallet";
+      SQL.update(updateStmt, formData);
         return formData;
     }
 
-    private void insertIntoAllExpenses(AddExpenseFormData formData, Integer id) {
-        IntegerHolder expenseId = new IntegerHolder();
-        expenseId.setValue(id);
-        StringHolder type = new StringHolder();
-        type.setValue("Posebni trošak");
-        String stmt = "INSERT INTO all_expenses (name, date, type, amount, budget_id, expense_id) VALUES (:Name, :Date, :Type, :Amount, :Budget, :ExpenseId)";
-        SQL.insert(stmt, formData, new NVPair("ExpenseId", expenseId), new NVPair("Type", type));
-    }
 
     @Override
     public AddExpenseFormData load(AddExpenseFormData formData) {

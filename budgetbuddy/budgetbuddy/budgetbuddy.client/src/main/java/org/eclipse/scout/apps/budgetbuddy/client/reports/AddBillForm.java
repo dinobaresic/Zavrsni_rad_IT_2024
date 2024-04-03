@@ -5,6 +5,7 @@ import org.eclipse.scout.apps.budgetbuddy.client.reports.AddBillForm.MainBox.Can
 import org.eclipse.scout.apps.budgetbuddy.client.reports.AddBillForm.MainBox.GroupBox;
 import org.eclipse.scout.apps.budgetbuddy.client.reports.AddBillForm.MainBox.OkButton;
 import org.eclipse.scout.apps.budgetbuddy.shared.lookups.BudgetLookupCall;
+import org.eclipse.scout.apps.budgetbuddy.shared.lookups.WalletLookupCall;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.*;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -42,10 +43,7 @@ public class AddBillForm extends AbstractForm {
   public GroupBox.DataFieldsBox.AmountField getAmountField() {
     return getFieldByClass(GroupBox.DataFieldsBox.AmountField.class);
   }
-
-  public GroupBox.DataFieldsBox.BudgetField getBudgetField() {
-    return getFieldByClass(GroupBox.DataFieldsBox.BudgetField.class);
-  }
+  
 
   public MainBox getMainBox() {
         return getFieldByClass(MainBox.class);
@@ -77,6 +75,10 @@ public class AddBillForm extends AbstractForm {
 
   public GroupBox.DataFieldsBox.TaxAmountField getTaxAmountField() {
     return getFieldByClass(GroupBox.DataFieldsBox.TaxAmountField.class);
+  }
+
+  public GroupBox.DataFieldsBox.WalletField getWalletField() {
+    return getFieldByClass(GroupBox.DataFieldsBox.WalletField.class);
   }
 
 
@@ -175,43 +177,20 @@ public class AddBillForm extends AbstractForm {
             }
 
             @Order(6000)
-            public class BudgetField extends AbstractSmartField<Long> {
+            public class WalletField extends AbstractSmartField<Long> {
               @Override
               protected String getConfiguredLabel() {
-                return TEXTS.get("BudgetName");
+                return TEXTS.get("WalletTablePage");
               }
 
-                @Override
-                protected Class<? extends IValueField> getConfiguredMasterField() {
-                    return AmountField.class;
-                }
-
-                @Override
-                protected boolean getConfiguredMasterRequired() {
-                    return true;
-                }
-
-                @Override
-                protected boolean getConfiguredMandatory() {
-                    return true;
-                }
-
-                @Override
-              protected Long execValidateValue(Long rawValue) {
-                if(rawValue == null) {
-                  return null;
-                }
-                BigDecimal amount = getAmountField().getValue();
-                boolean flag = BEANS.get(IBillsService.class).checkBudget(rawValue, amount);
-                if(!flag) {
-                  MessageBoxHelper.showWarningMessage("Budget is not enough, please select another budget or add more money to the current one...");
-                }
-                return super.execValidateValue(rawValue);
+              @Override
+              protected boolean getConfiguredMandatory() {
+                return true;
               }
 
               @Override
               protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
-                return BudgetLookupCall.class;
+                return WalletLookupCall.class;
               }
             }
 

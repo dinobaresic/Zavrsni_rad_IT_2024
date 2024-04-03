@@ -27,10 +27,6 @@ public class AddBillAiOcrFormData extends AbstractFormData {
         return getFieldByClass(Bill.class);
     }
 
-    public Budget getBudget() {
-        return getFieldByClass(Budget.class);
-    }
-
     public Date getDate() {
         return getFieldByClass(Date.class);
     }
@@ -41,6 +37,10 @@ public class AddBillAiOcrFormData extends AbstractFormData {
 
     public TaxAmount getTaxAmount() {
         return getFieldByClass(TaxAmount.class);
+    }
+
+    public Wallet getWallet() {
+        return getFieldByClass(Wallet.class);
     }
 
     public static class Address extends AbstractValueFieldData<String> {
@@ -55,10 +55,6 @@ public class AddBillAiOcrFormData extends AbstractFormData {
         private static final long serialVersionUID = 1L;
     }
 
-    public static class Budget extends AbstractValueFieldData<Long> {
-        private static final long serialVersionUID = 1L;
-    }
-
     public static class Date extends AbstractValueFieldData<java.util.Date> {
         private static final long serialVersionUID = 1L;
     }
@@ -68,6 +64,10 @@ public class AddBillAiOcrFormData extends AbstractFormData {
     }
 
     public static class TaxAmount extends AbstractValueFieldData<BigDecimal> {
+        private static final long serialVersionUID = 1L;
+    }
+
+    public static class Wallet extends AbstractValueFieldData<Long> {
         private static final long serialVersionUID = 1L;
     }
 }

@@ -18,21 +18,17 @@ public class AddBillService implements IAddBillService {
 
     @Override
     public AddBillFormData create(AddBillFormData formData) {
-        IntegerHolder id = new IntegerHolder();
-      String stmt = "INSERT INTO bills (name, address, taxamount, price, date, budget_id) VALUES (:Name, :Address, :TaxAmount, :Amount, :Date, :Budget) RETURNING id INTO :id";
-      SQL.selectInto(stmt, formData, new NVPair("id", id));
-      insertIntoAllExpenses(formData, id.getValue());
+
+      String stmt = "INSERT INTO bills (name, address, taxamount, price, date, wallet_id) VALUES (:Name, :Address, :TaxAmount, :Amount, :Date, :Wallet)";
+      SQL.insert(stmt, formData);
+
+      String stmt1 = "Update wallet set balance = balance - :Amount, last_used = now() where id = :Wallet";
+      SQL.update(stmt1, formData);
+
         return formData;
     }
 
-    private void insertIntoAllExpenses(AddBillFormData formData, Integer id) {
-        IntegerHolder billId = new IntegerHolder();
-        billId.setValue(id);
-        StringHolder type = new StringHolder();
-        type.setValue("Bill");
-        String stmt = "INSERT INTO all_expenses (name, date, type, amount, budget_id, bill_id) VALUES (:Name, :Date, :Type, :Amount, :Budget, :BillId)";
-        SQL.insert(stmt, formData, new NVPair("BillId", billId), new NVPair("Type", type));
-    }
+
 
     @Override
     public AddBillFormData load(AddBillFormData formData) {

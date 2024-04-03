@@ -18,21 +18,15 @@ public class AddBillAiOcrService implements IAddBillAiOcrService {
 
     @Override
     public AddBillAiOcrFormData create(AddBillAiOcrFormData formData) {
-        IntegerHolder id = new IntegerHolder();
-        String stmt = "INSERT INTO bills (name, address, taxamount, price, date, budget_id) VALUES (:Name, :Address, :TaxAmount, :Amount, :Date, :Budget) RETURNING id INTO :id";
-        SQL.selectInto(stmt, formData, new NVPair("id", id));
-        insertIntoAllExpenses(formData, id.getValue());
+
+        String stmt = "INSERT INTO bills (name, address, taxamount, price, date, wallet_id) VALUES (:Name, :Address, :TaxAmount, :Amount, :Date, :Wallet)";
+        SQL.insert(stmt, formData);
+        String stmt1 = "Update wallet set balance = balance - :Amount, last_used = now() where id = :Wallet";
+        SQL.update(stmt1, formData);
         return formData;
     }
 
-    private void insertIntoAllExpenses(AddBillAiOcrFormData formData, Integer id) {
-        IntegerHolder billId = new IntegerHolder();
-        billId.setValue(id);
-        StringHolder type = new StringHolder();
-        type.setValue("Račun");
-        String stmt = "INSERT INTO all_expenses (name, date, type, amount, budget_id, bill_id) VALUES (:Name, :Date, :Type, :Amount, :Budget, :billId)";
-        SQL.insert(stmt, formData, new NVPair("billId", billId), new NVPair("Type", type));
-    }
+
 
     @Override
     public AddBillAiOcrFormData load(AddBillAiOcrFormData formData) {

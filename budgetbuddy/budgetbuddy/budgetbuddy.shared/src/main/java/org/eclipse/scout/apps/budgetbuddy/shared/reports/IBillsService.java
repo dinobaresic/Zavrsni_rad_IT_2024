@@ -10,5 +10,4 @@ import java.math.BigDecimal;
 public interface IBillsService extends IService {
     BillsTablePageData getBillsTableData(SearchFilter filter);
     void deleteBill(Integer selectedValue);
-    boolean checkBudget(Long budgetId, BigDecimal amount);
 }

@@ -11,6 +11,7 @@ import org.eclipse.scout.apps.budgetbuddy.shared.expenses.IAddExpenseService;
 import org.eclipse.scout.apps.budgetbuddy.shared.expenses.UpdateAddExpensePermission;
 import org.eclipse.scout.apps.budgetbuddy.shared.lookups.BudgetLookupCall;
 import org.eclipse.scout.apps.budgetbuddy.shared.lookups.CategoriesLookupCall;
+import org.eclipse.scout.apps.budgetbuddy.shared.lookups.WalletLookupCall;
 import org.eclipse.scout.apps.budgetbuddy.shared.reports.IBillsService;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -42,10 +43,6 @@ public class AddExpenseForm extends AbstractForm {
         return getFieldByClass(GroupBox.AmountField.class);
     }
 
-    public GroupBox.BudgetField getBudgetField() {
-        return getFieldByClass(GroupBox.BudgetField.class);
-    }
-
     public MainBox getMainBox() {
         return getFieldByClass(MainBox.class);
     }
@@ -74,7 +71,11 @@ public class AddExpenseForm extends AbstractForm {
         return getFieldByClass(GroupBox.NameField.class);
     }
 
-    @Order(1000)
+  public GroupBox.WalletField getWalletField() {
+    return getFieldByClass(GroupBox.WalletField.class);
+  }
+
+  @Order(1000)
     public class MainBox extends AbstractGroupBox {
         @Order(1000)
         public class GroupBox extends AbstractGroupBox {
@@ -100,6 +101,11 @@ public class AddExpenseForm extends AbstractForm {
                 }
 
                 @Override
+                protected boolean getConfiguredMandatory() {
+                    return true;
+                }
+
+                @Override
                 protected String getConfiguredFormat() {
                     return "dd.MM.yyyy";
                 }
@@ -112,6 +118,11 @@ public class AddExpenseForm extends AbstractForm {
                 @Override
                 protected String getConfiguredLabel() {
                     return TEXTS.get("Category");
+                }
+
+                @Override
+                protected boolean getConfiguredMandatory() {
+                    return true;
                 }
 
                 @Override
@@ -143,46 +154,23 @@ public class AddExpenseForm extends AbstractForm {
                 }
             }
 
-            @Order(5000)
-            public class BudgetField extends AbstractSmartField<Long> {
-                @Override
-                protected String getConfiguredLabel() {
-                    return TEXTS.get("Budget");
-                }
-
-
-                @Override
-                protected Class<? extends IValueField> getConfiguredMasterField() {
-                    return AmountField.class;
-                }
-                @Override
-                protected boolean getConfiguredMasterRequired() {
-                    return true;
-                }
-                @Override
-                protected boolean getConfiguredMandatory() {
-                    return true;
-                }
-
-                @Override
-                protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
-                    return BudgetLookupCall.class;
-                }
-
-                @Override
-                protected Long execValidateValue(Long rawValue) {
-                    if(rawValue == null) {
-                        return null;
-                    }
-                    BigDecimal amount = getAmountField().getValue();
-                    boolean flag = BEANS.get(IBillsService.class).checkBudget(rawValue, amount);
-                    if(!flag) {
-                        MessageBoxHelper.showWarningMessage("Budget is not enough, please select another budget or add more money to the current one...");
-                    }
-                    return super.execValidateValue(rawValue);
-                }
-
+          @Order(4500)
+          public class WalletField extends AbstractSmartField<Long> {
+            @Override
+            protected String getConfiguredLabel() {
+              return TEXTS.get("WalletTablePage");
             }
+
+            @Override
+            protected boolean getConfiguredMandatory() {
+              return true;
+            }
+            @Override
+            protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
+              return WalletLookupCall.class;
+            }
+          }
+
 
 
         }

@@ -22,10 +22,6 @@ public class AddBillFormData extends AbstractFormData {
         return getFieldByClass(Amount.class);
     }
 
-    public Budget getBudget() {
-        return getFieldByClass(Budget.class);
-    }
-
     public Date getDate() {
         return getFieldByClass(Date.class);
     }
@@ -38,15 +34,15 @@ public class AddBillFormData extends AbstractFormData {
         return getFieldByClass(TaxAmount.class);
     }
 
+    public Wallet getWallet() {
+        return getFieldByClass(Wallet.class);
+    }
+
     public static class Address extends AbstractValueFieldData<String> {
         private static final long serialVersionUID = 1L;
     }
 
     public static class Amount extends AbstractValueFieldData<BigDecimal> {
-        private static final long serialVersionUID = 1L;
-    }
-
-    public static class Budget extends AbstractValueFieldData<Long> {
         private static final long serialVersionUID = 1L;
     }
 
@@ -59,6 +55,10 @@ public class AddBillFormData extends AbstractFormData {
     }
 
     public static class TaxAmount extends AbstractValueFieldData<BigDecimal> {
+        private static final long serialVersionUID = 1L;
+    }
+
+    public static class Wallet extends AbstractValueFieldData<Long> {
         private static final long serialVersionUID = 1L;
     }
 }

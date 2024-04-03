@@ -16,13 +16,12 @@ public class BudgetsService implements IBudgetsService {
       varname1.append("SELECT id, ");
       varname1.append("       name, ");
       varname1.append("       amount, ");
-      varname1.append("       expenses, ");
-      varname1.append("       current_balance, ");
       varname1.append("       date_created, ");
-      varname1.append("       income_category_id ");
+      varname1.append("       income_category_id, ");
+      varname1.append("       wallet_id ");
       varname1.append("FROM   budgets ");
       varname1.append("WHERE  is_deleted IS false ");
-      varname1.append(" INTO   :Id, :Name, :Amount, :Expenses, :CurrentBalance, :DateCreated, :IncomeCategory");
+      varname1.append(" INTO   :Id, :Name, :Amount, :DateCreated, :IncomeCategory, :Wallet");
       SQL.selectInto(varname1.toString(), pageData);
         return pageData;
     }
@@ -32,21 +31,10 @@ public class BudgetsService implements IBudgetsService {
 
     String stmt = "UPDATE budgets SET is_deleted = true, deleted_at = now() WHERE id = :budgetId";
     SQL.update(stmt, new NVPair("budgetId", selectedValue));
-    /*
-    String stmt = "DELETE FROM budgets WHERE id = :budgetId";
-    SQL.delete(stmt, new NVPair("budgetId", selectedValue));7
-     */
+
+    String stmt1 = "UPDATE wallet SET balance = balance - (SELECT amount FROM budgets WHERE id = :budgetId) WHERE id = (SELECT wallet_id FROM budgets WHERE id = :budgetId)";
+    SQL.update(stmt1, new NVPair("budgetId", selectedValue));
+
   }
 
-  @Override
-  public void substractBudgetAmount(BigDecimal amount, Long budgetId) {
-      String stmt = "UPDATE budgets SET expenses = expenses + :amount, current_balance = current_balance - :amount WHERE id = :budgetId";
-    SQL.update(stmt, new NVPair("budgetId", budgetId), new NVPair("amount", amount));
-  }
-
-  @Override
-  public void updateBudgetAmount(BigDecimal billAmount, Long budgetId) {
-    String stmt = "UPDATE budgets SET current_balance = current_balance + :billAmount, expenses = expenses - :billAmount WHERE id = :budgetId";
-    SQL.update(stmt, new NVPair("billAmount", billAmount), new NVPair("budgetId", budgetId));
-  }
 }

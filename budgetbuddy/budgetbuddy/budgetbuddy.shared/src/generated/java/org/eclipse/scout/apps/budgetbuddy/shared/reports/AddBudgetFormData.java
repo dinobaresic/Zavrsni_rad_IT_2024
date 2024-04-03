@@ -26,6 +26,10 @@ public class AddBudgetFormData extends AbstractFormData {
         return getFieldByClass(Name.class);
     }
 
+    public Wallet getWallet() {
+        return getFieldByClass(Wallet.class);
+    }
+
     public static class Amount extends AbstractValueFieldData<BigDecimal> {
         private static final long serialVersionUID = 1L;
     }
@@ -35,6 +39,10 @@ public class AddBudgetFormData extends AbstractFormData {
     }
 
     public static class Name extends AbstractValueFieldData<String> {
+        private static final long serialVersionUID = 1L;
+    }
+
+    public static class Wallet extends AbstractValueFieldData<Long> {
         private static final long serialVersionUID = 1L;
     }
 }
