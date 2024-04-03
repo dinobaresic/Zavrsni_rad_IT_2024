@@ -28,4 +28,6 @@ PG Admin upravitelj baze podataka <br>
 #### Ostale biblioteke:
 TAGGUN API ključ <br>
 
+#### Izvorni Link AI alata:  https://www.taggun.io/
+
 
