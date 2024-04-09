@@ -13,11 +13,11 @@ import javax.annotation.Generated;
 public class BudgetSearchFormData extends AbstractFormData {
     private static final long serialVersionUID = 1L;
 
-    public Budget getBudget() {
-        return getFieldByClass(Budget.class);
+    public Wallet getWallet() {
+        return getFieldByClass(Wallet.class);
     }
 
-    public static class Budget extends AbstractValueFieldData<Long> {
+    public static class Wallet extends AbstractValueFieldData<Long> {
         private static final long serialVersionUID = 1L;
     }
 }

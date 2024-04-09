@@ -52,7 +52,7 @@ public class BudgetsHistoryTablePage extends AbstractPageWithTable<Table> {
     @Override
     protected String getConfiguredTitle() {
 // TODO [Dino] verify translation
-        return TEXTS.get("BudgetsHistory0");
+        return TEXTS.get("ExpensesHistoryByWallet");
     }
 
     public class Table extends AbstractTable {

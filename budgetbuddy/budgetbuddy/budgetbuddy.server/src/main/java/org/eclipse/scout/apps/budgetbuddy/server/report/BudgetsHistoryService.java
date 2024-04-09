@@ -12,18 +12,25 @@ public class BudgetsHistoryService implements IBudgetsHistoryService {
         BudgetsHistoryTablePageData pageData = new BudgetsHistoryTablePageData();
 
         StringBuffer varname1 = new StringBuffer();
+      varname1.append("SELECT ");
+      varname1.append("    'račun' AS type, name, date, price AS amount ");
+      varname1.append("FROM ");
+      varname1.append("    bills ");
+      if (filter.getWallet().getValue() != null) {
+        varname1.append(" WHERE  wallet_id = " + filter.getWallet().getValue() + " ");
+      }
+      varname1.append(" ");
+      varname1.append("UNION ALL ");
+      varname1.append(" ");
+      varname1.append("SELECT ");
+      varname1.append("    'posebni trošak' AS type, name, date, amount ");
+      varname1.append("FROM ");
+      varname1.append("    expenses ");
+      if (filter.getWallet().getValue() != null) {
+        varname1.append(" WHERE  wallet_id = " + filter.getWallet().getValue() + " ");
+      }
 
-        varname1.append("SELECT name, ");
-        varname1.append("       type, ");
-        varname1.append("       date, ");
-        varname1.append("       amount ");
-        varname1.append("FROM   all_expenses ");
-
-        if (filter.getBudget().getValue() != null) {
-            varname1.append(" WHERE  budget_id = " + filter.getBudget().getValue() + " ");
-        }
-
-        varname1.append("INTO   :Name, :Type, :Date, :Amount");
+        varname1.append("INTO   :Type, :Name, :Date, :Amount");
 
         SQL.selectInto(varname1.toString(), pageData, filter);
 

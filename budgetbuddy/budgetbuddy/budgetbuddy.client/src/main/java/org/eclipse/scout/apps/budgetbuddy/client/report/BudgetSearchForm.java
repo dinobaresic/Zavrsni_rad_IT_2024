@@ -4,7 +4,7 @@ import org.eclipse.scout.apps.budgetbuddy.client.report.BudgetSearchForm.MainBox
 import org.eclipse.scout.apps.budgetbuddy.client.report.BudgetSearchForm.MainBox.GroupBox;
 import org.eclipse.scout.apps.budgetbuddy.client.report.BudgetSearchForm.MainBox.OkButton;
 import org.eclipse.scout.apps.budgetbuddy.shared.lookups.BudgetLookupCall;
-import org.eclipse.scout.apps.budgetbuddy.shared.lookups.IncomeCategoriesLookupCall;
+import org.eclipse.scout.apps.budgetbuddy.shared.lookups.WalletLookupCall;
 import org.eclipse.scout.apps.budgetbuddy.shared.report.BudgetSearchFormData;
 import org.eclipse.scout.rt.client.dto.FormData;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractSearchForm;
@@ -13,7 +13,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractResetButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractSearchButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
-import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
@@ -26,8 +25,8 @@ public class BudgetSearchForm extends AbstractSearchForm {
         return TEXTS.get("BudgetSearch");
     }
 
-    public GroupBox.BudgetField getBudgetField() {
-        return getFieldByClass(GroupBox.BudgetField.class);
+    public GroupBox.WalletField getBudgetField() {
+        return getFieldByClass(GroupBox.WalletField.class);
     }
 
     public MainBox getMainBox() {
@@ -52,10 +51,10 @@ public class BudgetSearchForm extends AbstractSearchForm {
         public class GroupBox extends AbstractGroupBox {
 
             @Order(1000)
-            public class BudgetField extends AbstractSmartField<Long> {
+            public class WalletField extends AbstractSmartField<Long> {
                 @Override
                 protected String getConfiguredLabel() {
-                    return TEXTS.get("Income0");
+                    return TEXTS.get("WalletName");
                 }
 
                 @Override
@@ -65,7 +64,7 @@ public class BudgetSearchForm extends AbstractSearchForm {
 
                 @Override
                 protected Class<? extends ILookupCall<Long>> getConfiguredLookupCall() {
-                    return BudgetLookupCall.class;
+                    return WalletLookupCall.class;
                 }
 
             }
