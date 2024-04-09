@@ -33,7 +33,7 @@ public class AddBillForm extends AbstractForm {
 
     @Override
     protected String getConfiguredTitle() {
-        return TEXTS.get("AddBill");
+        return TEXTS.get("AddBill0");
     }
 
   public GroupBox.DataFieldsBox.AddressField getAddressField() {
@@ -43,7 +43,7 @@ public class AddBillForm extends AbstractForm {
   public GroupBox.DataFieldsBox.AmountField getAmountField() {
     return getFieldByClass(GroupBox.DataFieldsBox.AmountField.class);
   }
-  
+
 
   public MainBox getMainBox() {
         return getFieldByClass(MainBox.class);
@@ -98,7 +98,7 @@ public class AddBillForm extends AbstractForm {
             public class NameField extends AbstractStringField {
               @Override
               protected String getConfiguredLabel() {
-                return TEXTS.get("MerchantName");
+                return TEXTS.get("MerchantName0");
               }
 
               @Override
@@ -111,7 +111,7 @@ public class AddBillForm extends AbstractForm {
             public class AddressField extends AbstractStringField {
               @Override
               protected String getConfiguredLabel() {
-                return TEXTS.get("MerchantAddress");
+                return TEXTS.get("MerchantAddress0");
               }
 
               @Override
@@ -124,7 +124,7 @@ public class AddBillForm extends AbstractForm {
             public class TaxAmountField extends AbstractBigDecimalField {
               @Override
               protected String getConfiguredLabel() {
-                return TEXTS.get("TaxAmount0");
+                return TEXTS.get("TaxAmount1");
               }
 
               @Override
@@ -143,7 +143,7 @@ public class AddBillForm extends AbstractForm {
             public class AmountField extends AbstractBigDecimalField {
               @Override
               protected String getConfiguredLabel() {
-                return TEXTS.get("TotalPrice");
+                return TEXTS.get("BillPrice0");
               }
 
                 @Override
@@ -166,7 +166,7 @@ public class AddBillForm extends AbstractForm {
             public class DateField extends AbstractDateField {
               @Override
               protected String getConfiguredLabel() {
-                return TEXTS.get("Date");
+                return TEXTS.get("Date0");
               }
 
               @Override

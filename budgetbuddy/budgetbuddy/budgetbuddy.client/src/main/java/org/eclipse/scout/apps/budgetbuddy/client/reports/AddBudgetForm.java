@@ -143,6 +143,11 @@ public class AddBudgetForm extends AbstractForm {
               }
 
               @Override
+              protected boolean getConfiguredMandatory() {
+                return true;
+              }
+
+              @Override
               protected BigDecimal getConfiguredMinValue() {
                 return new BigDecimal("-999999999999999999");
               }

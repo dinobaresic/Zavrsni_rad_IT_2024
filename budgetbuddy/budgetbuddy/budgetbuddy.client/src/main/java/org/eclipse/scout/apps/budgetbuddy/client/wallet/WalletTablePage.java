@@ -3,6 +3,7 @@ package org.eclipse.scout.apps.budgetbuddy.client.wallet;
 import org.eclipse.scout.apps.budgetbuddy.client.common.AbstractAddMenu;
 import org.eclipse.scout.apps.budgetbuddy.client.informations.NotificationHelper;
 import org.eclipse.scout.apps.budgetbuddy.client.wallet.WalletTablePage.Table;
+import org.eclipse.scout.apps.budgetbuddy.shared.Icons;
 import org.eclipse.scout.apps.budgetbuddy.shared.wallet.IWalletService;
 import org.eclipse.scout.apps.budgetbuddy.shared.wallet.WalletTablePageData;
 import org.eclipse.scout.rt.client.dto.Data;
@@ -35,7 +36,17 @@ public class WalletTablePage extends AbstractPageWithTable<Table> {
         importPageData(BEANS.get(IWalletService.class).getWalletTableData(filter));
     }
 
-    @Override
+  @Override
+  protected String getConfiguredIconId() {
+    return Icons.Sum;
+  }
+
+  @Override
+  protected String getConfiguredOverviewIconId() {
+    return Icons.Sum;
+  }
+
+  @Override
     protected String getConfiguredTitle() {
 // TODO [Dino] verify translation
         return TEXTS.get("WalletTablePage");

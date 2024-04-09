@@ -6,7 +6,9 @@ import org.eclipse.scout.apps.budgetbuddy.shared.report.BudgetSearchFormData;
 import org.eclipse.scout.apps.budgetbuddy.shared.report.BudgetsHistoryTablePageData;
 import org.eclipse.scout.apps.budgetbuddy.shared.report.IBudgetsHistoryService;
 import org.eclipse.scout.rt.client.dto.Data;
+import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
+import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBigDecimalColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDateColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
@@ -130,6 +132,12 @@ public class BudgetsHistoryTablePage extends AbstractPageWithTable<Table> {
                 return TEXTS.get("Amount0");
             }
 
+          @Override
+          protected void execDecorateCell(Cell cell, ITableRow row) {
+            if (cell.getValue() != null) {
+              cell.setBackgroundColor("FFC0C0");
+            }
+          }
             @Override
             protected int getConfiguredWidth() {
                 return 100;

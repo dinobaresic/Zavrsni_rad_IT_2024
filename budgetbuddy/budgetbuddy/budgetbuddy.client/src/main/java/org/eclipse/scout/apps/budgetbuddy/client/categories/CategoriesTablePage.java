@@ -4,6 +4,7 @@ import org.eclipse.scout.apps.budgetbuddy.client.categories.CategoriesTablePage.
 import org.eclipse.scout.apps.budgetbuddy.client.common.AbstractAddMenu;
 import org.eclipse.scout.apps.budgetbuddy.client.informations.MessageBoxHelper;
 import org.eclipse.scout.apps.budgetbuddy.client.informations.NotificationHelper;
+import org.eclipse.scout.apps.budgetbuddy.shared.Icons;
 import org.eclipse.scout.apps.budgetbuddy.shared.categories.AddCategoryFormData;
 import org.eclipse.scout.apps.budgetbuddy.shared.categories.CategoriesTablePageData;
 import org.eclipse.scout.apps.budgetbuddy.shared.categories.ICategoriesService;
@@ -30,7 +31,17 @@ public class CategoriesTablePage extends AbstractPageWithTable<Table> {
         return true;
     }
 
-    @Override
+  @Override
+  protected String getConfiguredOverviewIconId() {
+    return Icons.Group;
+  }
+
+  @Override
+  protected String getConfiguredIconId() {
+    return Icons.Group;
+  }
+
+  @Override
     protected void execLoadData(SearchFilter filter) {
         importPageData(BEANS.get(ICategoriesService.class).getCategoriesTableData(filter));
     }

@@ -41,7 +41,7 @@ public class AddBillAiOcrForm extends AbstractForm {
     @Override
     protected String getConfiguredTitle() {
 // TODO [Dino] verify translation
-        return TEXTS.get("AddBillAiOcr");
+        return TEXTS.get("AddBillAiOcr0");
     }
 
     public MainBox.DataFieldBox.AddressField getAddressField() {
@@ -106,7 +106,7 @@ public class AddBillAiOcrForm extends AbstractForm {
             public class BillField extends AbstractFileChooserField {
                 @Override
                 protected String getConfiguredLabel() {
-                    return TEXTS.get("Bill");
+                    return TEXTS.get("Bill0");
                 }
 
 
@@ -247,7 +247,7 @@ public class AddBillAiOcrForm extends AbstractForm {
             public class NameField extends AbstractStringField {
                 @Override
                 protected String getConfiguredLabel() {
-                    return TEXTS.get("MerchantName");
+                    return TEXTS.get("MerchantName0");
                 }
                 @Override
                 protected boolean getConfiguredEnabled() {
@@ -263,7 +263,7 @@ public class AddBillAiOcrForm extends AbstractForm {
             public class AddressField extends AbstractStringField {
                 @Override
                 protected String getConfiguredLabel() {
-                    return TEXTS.get("MerchantAddress");
+                    return TEXTS.get("MerchantAddress0");
                 }
 
                 @Override
@@ -280,7 +280,7 @@ public class AddBillAiOcrForm extends AbstractForm {
             public class TaxAmountField extends AbstractBigDecimalField {
                 @Override
                 protected String getConfiguredLabel() {
-                    return TEXTS.get("TaxAmount0");
+                    return TEXTS.get("TaxAmount1");
                 }
 
                 @Override
@@ -303,7 +303,7 @@ public class AddBillAiOcrForm extends AbstractForm {
             public class AmountField extends AbstractBigDecimalField {
                 @Override
                 protected String getConfiguredLabel() {
-                    return TEXTS.get("TotalPrice");
+                    return TEXTS.get("BillPrice0");
                 }
 
                 @Override
@@ -331,7 +331,7 @@ public class AddBillAiOcrForm extends AbstractForm {
             public class DateField extends AbstractDateField {
                 @Override
                 protected String getConfiguredLabel() {
-                    return TEXTS.get("Date");
+                    return TEXTS.get("Date0");
                 }
                 @Override
                 protected boolean getConfiguredEnabled() {

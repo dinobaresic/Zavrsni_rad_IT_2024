@@ -84,10 +84,12 @@ public class GeneralTablePage extends AbstractPageWithTable<Table> {
                 return TEXTS.get("Income00");
             }
 
-            @Override
-            protected void execDecorateCell(Cell cell, ITableRow row) {
-                cell.setBackgroundColor("lightgreen");
+          @Override
+          protected void execDecorateCell(Cell cell, ITableRow row) {
+            if (cell.getValue() != null) {
+              cell.setBackgroundColor("C0FFC0");
             }
+          }
 
             @Override
             protected int getConfiguredWidth() {

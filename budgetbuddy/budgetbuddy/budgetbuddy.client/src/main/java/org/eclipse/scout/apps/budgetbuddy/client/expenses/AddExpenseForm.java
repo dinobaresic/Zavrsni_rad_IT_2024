@@ -84,7 +84,7 @@ public class AddExpenseForm extends AbstractForm {
             public class NameField extends AbstractStringField {
                 @Override
                 protected String getConfiguredLabel() {
-                    return TEXTS.get("Name0");
+                    return TEXTS.get("ExpenseName0");
                 }
 
                 @Override
@@ -97,7 +97,7 @@ public class AddExpenseForm extends AbstractForm {
             public class DateField extends AbstractDateField {
                 @Override
                 protected String getConfiguredLabel() {
-                    return TEXTS.get("Date");
+                    return TEXTS.get("Date0");
                 }
 
                 @Override
@@ -117,7 +117,7 @@ public class AddExpenseForm extends AbstractForm {
             public class CategoryField extends AbstractSmartField<Long> {
                 @Override
                 protected String getConfiguredLabel() {
-                    return TEXTS.get("Category");
+                    return TEXTS.get("ExpenseCategory0");
                 }
 
                 @Override
@@ -135,7 +135,7 @@ public class AddExpenseForm extends AbstractForm {
             public class AmountField extends AbstractBigDecimalField {
                 @Override
                 protected String getConfiguredLabel() {
-                    return TEXTS.get("Amount");
+                    return TEXTS.get("AmountExpense");
                 }
 
                 @Override

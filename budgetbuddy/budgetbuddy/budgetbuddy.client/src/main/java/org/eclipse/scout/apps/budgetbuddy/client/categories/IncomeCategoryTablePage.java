@@ -3,6 +3,7 @@ package org.eclipse.scout.apps.budgetbuddy.client.categories;
 import org.eclipse.scout.apps.budgetbuddy.client.categories.IncomeCategoryTablePage.Table;
 import org.eclipse.scout.apps.budgetbuddy.client.common.AbstractAddMenu;
 import org.eclipse.scout.apps.budgetbuddy.client.informations.NotificationHelper;
+import org.eclipse.scout.apps.budgetbuddy.shared.Icons;
 import org.eclipse.scout.apps.budgetbuddy.shared.categories.IIncomeCategoryService;
 import org.eclipse.scout.apps.budgetbuddy.shared.categories.IncomeCategoryTablePageData;
 import org.eclipse.scout.rt.client.dto.Data;
@@ -27,6 +28,16 @@ public class IncomeCategoryTablePage extends AbstractPageWithTable<Table> {
     protected boolean getConfiguredLeaf() {
         return true;
     }
+
+  @Override
+  protected String getConfiguredOverviewIconId() {
+    return Icons.Group;
+  }
+
+  @Override
+  protected String getConfiguredIconId() {
+    return Icons.Group;
+  }
 
     @Override
     protected void execLoadData(SearchFilter filter) {

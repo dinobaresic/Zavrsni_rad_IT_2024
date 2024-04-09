@@ -35,10 +35,10 @@ public class GeneralDataNodePage extends AbstractPageWithNodes {
         return Icons.PersonSolid;
     }
 
-    @Override
-    protected String getConfiguredOverviewIconId() {
-        return Icons.PersonSolid;
-    }
+  @Override
+  protected String getConfiguredOverviewIconId() {
+    return Icons.Chart;
+  }
 
   @Override
   protected void execCreateChildPages(List<IPage<?>> pageList) {
