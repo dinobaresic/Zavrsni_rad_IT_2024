@@ -91,7 +91,7 @@ public class AddBillForm extends AbstractForm {
           public class DataFieldsBox extends AbstractGroupBox {
             @Override
             protected String getConfiguredLabel() {
-              return TEXTS.get("Data");
+              return TEXTS.get("Data0");
             }
 
             @Order(1000)

@@ -30,6 +30,8 @@ public class BudgetsHistoryService implements IBudgetsHistoryService {
         varname1.append(" WHERE  wallet_id = " + filter.getWallet().getValue() + " ");
       }
 
+      varname1.append("ORDER BY date DESC");
+
         varname1.append("INTO   :Type, :Name, :Date, :Amount");
 
         SQL.selectInto(varname1.toString(), pageData, filter);

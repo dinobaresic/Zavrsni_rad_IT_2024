@@ -36,7 +36,7 @@ public class AddExpenseForm extends AbstractForm {
     @Override
     protected String getConfiguredTitle() {
 // TODO [Dino] verify translation
-        return TEXTS.get("AddExpense");
+        return TEXTS.get("AddExpense0");
     }
 
     public GroupBox.AmountField getAmountField() {
