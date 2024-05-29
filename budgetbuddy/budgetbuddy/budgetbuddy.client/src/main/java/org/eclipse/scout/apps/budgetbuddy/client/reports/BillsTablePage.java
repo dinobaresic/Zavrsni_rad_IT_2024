@@ -81,6 +81,7 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
         }
       }
 
+
       @Order(2000)
       public class AddMenu extends AbstractAddMenu {
 
@@ -97,11 +98,13 @@ public class BillsTablePage extends AbstractPageWithTable<Table> {
         }
       }
 
+
+
       @Order(3000)
       public class AddBillAIMenu extends AbstractMenu {
         @Override
         protected String getConfiguredText() {
-          return TEXTS.get("AddBillAiOcr0");
+          return TEXTS.get("AddBillAiOcr01");
         }
 
         @Override

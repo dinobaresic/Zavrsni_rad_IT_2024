@@ -109,18 +109,15 @@ public class AddBillAiOcrForm extends AbstractForm {
                     return TEXTS.get("Bill0");
                 }
 
-
+                @Override
                 protected java.util.List<String> getConfiguredFileExtensions() {
-                    return CollectionUtility.arrayList("pdf", "jpg", "png", "jpeg");
+                    return CollectionUtility.arrayList("pdf","jpg", "png");
                 }
-
-
                 protected void execChangedValue() {
 
                     if(getBillField().isEmpty()) {
                         return;
                     }
-
                     getNameField().resetValue();
                     getDateField().resetValue();
                     getAmountField().resetValue();
@@ -128,8 +125,6 @@ public class AddBillAiOcrForm extends AbstractForm {
                     getTaxAmountField().resetValue();
 
                     BinaryResource file = getBillField().getValue();
-
-
 
                     try {
 
@@ -172,17 +167,14 @@ public class AddBillAiOcrForm extends AbstractForm {
                     }catch(IOException io) {
 
                     }
-
                     if(getNameField().isEmpty() && getAddressField().isEmpty() && getTaxAmountField().isEmpty() && getDateField().isEmpty() && getAmountField().isEmpty()) {
                         setEnabled(true);
                         MessageBoxHelper.showWarningMessage("Can not find any data, try another one...");
                     }else {
                         getBillImageField().setImage(file);
                     }
-
                     super.execChangedValue();
                 }
-
                 private File createFileFromBinaryResource(BinaryResource binaryResource, String fileName) throws IOException {
                     byte[] data = binaryResource.getContent();
                     File file = new File(fileName);
@@ -249,10 +241,7 @@ public class AddBillAiOcrForm extends AbstractForm {
                 protected String getConfiguredLabel() {
                     return TEXTS.get("MerchantName0");
                 }
-                @Override
-                protected boolean getConfiguredEnabled() {
-                    return false;
-                }
+
                 @Override
                 protected int getConfiguredMaxLength() {
                     return 128;
@@ -266,10 +255,7 @@ public class AddBillAiOcrForm extends AbstractForm {
                     return TEXTS.get("MerchantAddress0");
                 }
 
-                @Override
-                protected boolean getConfiguredEnabled() {
-                    return false;
-                }
+
                 @Override
                 protected int getConfiguredMaxLength() {
                     return 128;
@@ -288,10 +274,7 @@ public class AddBillAiOcrForm extends AbstractForm {
                     return new BigDecimal("-999999999999999999");
                 }
 
-                @Override
-                protected boolean getConfiguredEnabled() {
-                    return false;
-                }
+
 
                 @Override
                 protected BigDecimal getConfiguredMaxValue() {
@@ -311,10 +294,7 @@ public class AddBillAiOcrForm extends AbstractForm {
                     return new BigDecimal("-999999999999999999");
                 }
 
-                @Override
-                protected boolean getConfiguredEnabled() {
-                    return false;
-                }
+
 
                 @Override
                 protected boolean getConfiguredMandatory() {
@@ -333,10 +313,7 @@ public class AddBillAiOcrForm extends AbstractForm {
                 protected String getConfiguredLabel() {
                     return TEXTS.get("Date0");
                 }
-                @Override
-                protected boolean getConfiguredEnabled() {
-                    return false;
-                }
+
 
             }
 
